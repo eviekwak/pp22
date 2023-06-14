@@ -9,17 +9,25 @@ public class Inventory {
     private ObservableList<Product> allProducts;
 
     public void addPart(Part newPart) {
-
+        allParts.add(newPart);
     }
     public void addProduct(Product newProduct) {
-
+        allProducts.add(newProduct);
     }
-    public Part lookupPart(int partId){
-
+    public static Part lookupPart(int partId){
+        for (Part part : allParts){
+            if (part.getId() == partId){
+                return part;
+            }
+        }
         return null;
     }
     public Product lookupProduct(int partId){
-
+        for (Product product : allProducts){
+            if (product.getId() == partId){
+                return product;
+            }
+        }
         return null;
     }
     public void updatePart(int index, Part selectedPart){
