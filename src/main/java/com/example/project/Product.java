@@ -4,7 +4,7 @@ package com.example.project;
  *
  * @author Evie Kwak
  */
-public abstract class Product {
+public class Product {
     //private associatedParts<Part>;
     private int id;
     private String name;
