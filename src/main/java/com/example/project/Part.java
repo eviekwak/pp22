@@ -4,8 +4,7 @@ package com.example.project; /**
 
 /**
  *
- * Author: Evie Kwakie
- * hello Ruslan! Welcome to my project.
+ * Author: Evie Kwak
  */
 public abstract class Part {
     private int id;
