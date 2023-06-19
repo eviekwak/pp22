@@ -19,7 +19,7 @@ public class homeController {
     private Text leLabel;
 
     @FXML
-    public void AddLeButtonClick(ActionEvent actionEvent) throws IOException {
+    public void AddPartsButtonHome(ActionEvent actionEvent) throws IOException {
 
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -27,5 +27,20 @@ public class homeController {
         window.setScene(tableViewScene);
         window.show();
 
+    }
+
+    public void ModifyPartsButtonHome(ActionEvent actionEvent) {
+    }
+
+    public void DeletePartsButtonHome(ActionEvent actionEvent) {
+    }
+
+    public void AddProductsButtonHome(ActionEvent actionEvent) {
+    }
+
+    public void ModifyProductsButtonHome(ActionEvent actionEvent) {
+    }
+
+    public void DeleteProductsButtonHome(ActionEvent actionEvent) {
     }
 }
