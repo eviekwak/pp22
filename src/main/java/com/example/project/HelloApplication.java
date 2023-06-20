@@ -19,12 +19,11 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+
     public static void main(String[] args) {
 
-        Inventory MainInventory = new Inventory();
-        InHouse testInHousePart = new InHouse(1,"Screw", 5.00, 2, 1,5, 100);
-        MainInventory.addPart(testInHousePart);
-        System.out.println(MainInventory.lookupPart());
+
+
         launch();
     }
 }
