@@ -51,23 +51,23 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <RadioButton layoutX="117.0" layoutY="22.0" mnemonicParsing="false" selected="true" text="In-house">
+                  <RadioButton fx:id="IHInhouseRadioButton" layoutX="117.0" layoutY="22.0" mnemonicParsing="false" selected="true" text="In-house">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="214.0" layoutY="22.0" mnemonicParsing="false" text="Outsourced">
+                  <RadioButton fx:id="IHOutsourcedRadioButton" layoutX="214.0" layoutY="22.0" mnemonicParsing="false" text="Outsourced">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </RadioButton>
-                  <TextField layoutX="133.0" layoutY="84.0" />
-                  <TextField layoutX="133.0" layoutY="125.0" />
-                  <TextField layoutX="133.0" layoutY="170.0" />
-                  <TextField layoutX="133.0" layoutY="210.0" />
-                  <TextField layoutX="133.0" layoutY="251.0" />
-                  <TextField layoutX="365.0" layoutY="251.0" />
-                  <TextField layoutX="133.0" layoutY="294.0" />
+                  <TextField fx:id="IHIDField" layoutX="133.0" layoutY="84.0" />
+                  <TextField fx:id="IHNameField" layoutX="133.0" layoutY="125.0" />
+                  <TextField fx:id="IHInvField" layoutX="133.0" layoutY="170.0" />
+                  <TextField fx:id="IHPriceField" layoutX="133.0" layoutY="210.0" />
+                  <TextField fx:id="IHMaxField" layoutX="133.0" layoutY="251.0" />
+                  <TextField fx:id="IHMinField" layoutX="365.0" layoutY="251.0" />
+                  <TextField fx:id="IHCompanyNameField" layoutX="133.0" layoutY="294.0" />
                   <Text layoutX="27.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
                   <Text layoutX="25.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
                   <Text layoutX="25.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inv" />
@@ -75,12 +75,12 @@
                   <Text layoutX="25.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max" />
                   <Text layoutX="320.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min" />
                   <Text layoutX="25.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Company Name" />
-                  <Button layoutX="256.0" layoutY="365.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="83.0" text="Save">
+                  <Button layoutX="256.0" layoutY="365.0" mnemonicParsing="false" onAction="#SaveInhouseButton" prefHeight="36.0" prefWidth="83.0" text="Save">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="357.0" layoutY="365.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="83.0" text="Cancel">
+                  <Button layoutX="357.0" layoutY="365.0" mnemonicParsing="false" onAction="#CancelInhouseButton" prefHeight="36.0" prefWidth="83.0" text="Cancel">
                      <font>
                         <Font size="15.0" />
                      </font>
