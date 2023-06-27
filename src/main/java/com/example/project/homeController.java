@@ -7,9 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -22,6 +20,9 @@ public class homeController implements Initializable {
 
     @FXML
     public TableColumn<Part, String> PartNameColumnHome,PartInventLvlColumnHome, PartPriceColumnHome;
+    public TextField IHIDField, IHNameField,IHInvField, IHPriceField, IHCompanyNameField, IHMinField,IHMaxField;
+    public RadioButton IHOutsourcedRadioButton,IHInhouseRadioButton;
+
 
     @FXML
     private TableView<Part> PartsTableviewHome;
@@ -71,5 +72,11 @@ public class homeController implements Initializable {
         PartInventLvlColumnHome.setCellValueFactory(new PropertyValueFactory<>("stock"));
         PartsTableviewHome.setItems(inventory.getAllParts());
 
+    }
+
+    public void SaveInhouseButton(ActionEvent actionEvent) {
+    }
+
+    public void CancelInhouseButton(ActionEvent actionEvent) {
     }
 }
