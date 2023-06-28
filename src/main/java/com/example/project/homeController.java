@@ -14,14 +14,31 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class homeController implements Initializable {
 
+    public Text CompanyNameText;
+    int incrementingPartID = 1000;
+int incrementingProductID = 1000;
+
+public int returnPartID(){
+    incrementingPartID--;
+    return incrementingPartID;
+    }
+
+    public int returnProductID(){
+        incrementingProductID--;
+        return incrementingProductID;
+    }
     @FXML
     public TableColumn<Part, String> PartNameColumnHome,PartInventLvlColumnHome, PartPriceColumnHome;
     public TextField IHIDField, IHNameField,IHInvField, IHPriceField, IHCompanyNameField, IHMinField,IHMaxField;
     public RadioButton IHOutsourcedRadioButton,IHInhouseRadioButton;
+
+
 
 
     @FXML
@@ -44,6 +61,11 @@ public class homeController implements Initializable {
     }
 
     public void ModifyPartsButtonHome(ActionEvent actionEvent) {
+
+//
+//        System.out.println(randomNumber);
+//        System.out.println("test");
+
     }
 
     public void DeletePartsButtonHome(ActionEvent actionEvent) {
@@ -62,8 +84,9 @@ public class homeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Inventory inventory = new Inventory();
-        InHouse testInHousePart = new InHouse(1,"Screw", 5.00, 2, 1,5, 100);
-        InHouse test2InHousePart = new InHouse(24,"yep", 5.00, 2, 1,5, 100);
+
+        InHouse testInHousePart = new InHouse(returnPartID(),"Screw", 5.00, 2, 1,5, 100);
+        InHouse test2InHousePart = new InHouse(returnPartID(),"yep", 5.00, 2, 1,5, 100);
         inventory.addPart(testInHousePart);
         inventory.addPart(test2InHousePart);
         PartIDColumnHome.setCellValueFactory(new PropertyValueFactory<Part, Integer>("id"));
