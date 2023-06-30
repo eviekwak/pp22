@@ -27,7 +27,7 @@ public class homeController implements Initializable {
     private Stage stage = new Stage();
 
     @FXML
-    public TableColumn<Part, String> PartNameColumnHome,PartInventLvlColumnHome, PartPriceColumnHome;
+    public TableColumn<Part, String> PartNameColumnHome, PartPriceColumnHome;
 
 
 
@@ -35,7 +35,7 @@ public class homeController implements Initializable {
     @FXML
     private TableView<Part> PartsTableviewHome;
     @FXML
-    private TableColumn<Part, Integer> PartIDColumnHome;
+    private TableColumn<Part, Integer> PartIDColumnHome, PartInventLvlColumnHome;
 
     @FXML
     public void AddPartsButtonHome(ActionEvent event) throws IOException {
@@ -56,7 +56,7 @@ public class homeController implements Initializable {
 
         stage.setScene(scene);
         stage.show();
-        addAnyPartController.IHNameField.setText("dd");
+//        addAnyPartController.IHNameField.setText("dd");
 
     }
 
@@ -87,8 +87,8 @@ public class homeController implements Initializable {
         System.out.println("Initialized home");
         PartIDColumnHome.setCellValueFactory(new PropertyValueFactory<Part, Integer>("id"));
         PartNameColumnHome.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
-        PartInventLvlColumnHome.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        PartInventLvlColumnHome.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        PartInventLvlColumnHome.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
+        PartPriceColumnHome.setCellValueFactory(new PropertyValueFactory<>("price"));
         PartsTableviewHome.setItems(Model.getInstance().getInventory().getAllParts());
 
     }

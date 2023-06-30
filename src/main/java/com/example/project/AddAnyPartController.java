@@ -34,12 +34,6 @@ private Scene scene;
 
 
 
-
-
-
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     System.out.println("Initialized addanypart");
@@ -47,7 +41,14 @@ private Scene scene;
     }
 
     public void SaveInhouseButton(ActionEvent actionEvent) {
+        System.out.println(IHIDField.getText());
+        String inputName = IHNameField.getText();
+        Double inputPrice = Double.parseDouble(IHPriceField.getText());
+        Integer inputInv = Integer.parseInt(IHInvField.getText());
 
+//        Outsourced testy = new Outsourced()
+        InHouse newPart = new InHouse(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, 1,5, 100);
+        Model.getInstance().getInventory().addPart(newPart);
     }
 
     public void CancelInhouseButton(ActionEvent event) throws IOException {
