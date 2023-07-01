@@ -28,27 +28,43 @@ private Scene scene;
     private AnchorPane rootPane;
 
     @FXML
-    public TextField IHIDField, IHNameField,IHInvField, IHPriceField, IHCompanyNameField, IHMinField,IHMaxField;
+    public TextField IHIDField, IHNameField,IHInvField, IHPriceField, IHMachineIDField, IHMinField,IHMaxField;
     @FXML
     public RadioButton IHOutsourcedRadioButton,IHInhouseRadioButton;
 
-
+    @FXML
+    public Text RadioTextChange;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     System.out.println("Initialized addanypart");
-
+    ToggleGroup AddPartToggle = new ToggleGroup();
+    IHInhouseRadioButton.setToggleGroup(AddPartToggle);
+    IHOutsourcedRadioButton.setToggleGroup(AddPartToggle);
     }
 
     public void SaveInhouseButton(ActionEvent actionEvent) {
+
         System.out.println(IHIDField.getText());
         String inputName = IHNameField.getText();
         Double inputPrice = Double.parseDouble(IHPriceField.getText());
         Integer inputInv = Integer.parseInt(IHInvField.getText());
+        Integer inputMin = Integer.parseInt(IHMinField.getText());
+        Integer inputMax = Integer.parseInt(IHMinField.getText());
+        String inputMachineID = IHMachineIDField.getText();
+
 
 //        Outsourced testy = new Outsourced()
-        InHouse newPart = new InHouse(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, 1,5, 100);
-        Model.getInstance().getInventory().addPart(newPart);
+        if (IHInhouseRadioButton.isSelected()){
+
+            InHouse newPart = new InHouse(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin,inputMax, Integer.parseInt(inputMachineID));
+            Model.getInstance().getInventory().addPart(newPart);
+        }
+        else if (IHOutsourcedRadioButton.isSelected()){
+            Outsourced newPart = new Outsourced(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin,inputMax, inputMachineID);
+            Model.getInstance().getInventory().addPart(newPart);
+        }
+
     }
 
     public void CancelInhouseButton(ActionEvent event) throws IOException {
@@ -61,5 +77,14 @@ private Scene scene;
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    public void ListenRadio(ActionEvent ev){
+        if (IHInhouseRadioButton.isSelected()) {
+        RadioTextChange.setText("Machine ID");
+        }
+        else if (IHOutsourcedRadioButton.isSelected()){
+        RadioTextChange.setText("Company Name");
+        }
     }
 }
