@@ -45,17 +45,27 @@ private Scene scene;
 
     public void SaveInhouseButton(ActionEvent actionEvent) {
 
-        System.out.println(IHIDField.getText());
-        String inputName = IHNameField.getText();
-        Double inputPrice = Double.parseDouble(IHPriceField.getText());
-        Integer inputInv = Integer.parseInt(IHInvField.getText());
-        Integer inputMin = Integer.parseInt(IHMinField.getText());
-        Integer inputMax = Integer.parseInt(IHMinField.getText());
-        String inputMachineID = IHMachineIDField.getText();
+        try {
 
+            Integer x = 5;
+
+            System.out.println(IHIDField.getText());
+            String inputName = IHNameField.getText();
+            Double inputPrice = Double.parseDouble(IHPriceField.getText());
+            Integer inputInv = Integer.parseInt(IHInvField.getText());
+            Integer inputMin = Integer.parseInt(IHMinField.getText());
+            Integer inputMax = Integer.parseInt(IHMaxField.getText());
+            String inputMachineID = IHMachineIDField.getText();
+
+            if (inputMin > inputMax){
+                throw new Exception("Min should be less than Max ");}
+            if (inputInv < inputMin || inputInv > inputMax){
+                throw new Exception("Inv must be between Min and Max ");
+            }
 
 //        Outsourced testy = new Outsourced()
-        if (IHInhouseRadioButton.isSelected()){
+
+            if (IHInhouseRadioButton.isSelected()){
 
             InHouse newPart = new InHouse(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin,inputMax, Integer.parseInt(inputMachineID));
             Model.getInstance().getInventory().addPart(newPart);
@@ -64,6 +74,17 @@ private Scene scene;
             Outsourced newPart = new Outsourced(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin,inputMax, inputMachineID);
             Model.getInstance().getInventory().addPart(newPart);
         }
+
+    }
+        catch (NumberFormatException nfe) {
+            AlertMethod("The input " + nfe.getMessage() + "was the wrong data type.");
+
+
+        }
+        catch (Exception wrongType) {
+        AlertMethod("Something went wrong" + wrongType);
+    }
+
 
     }
 
@@ -85,6 +106,14 @@ private Scene scene;
         }
         else if (IHOutsourcedRadioButton.isSelected()){
         RadioTextChange.setText("Company Name");
+        }
+    }
+    public void AlertMethod(String x){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.OK);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
         }
     }
 }
