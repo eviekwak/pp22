@@ -34,8 +34,10 @@ public class Inventory {
 
     }
     public boolean deletePart(Part selectedPart){
-        return true;
-    }
+        allParts.remove(selectedPart);
+        return true; }
+
+
     public boolean deleteProduct(Product selectedProduct){
 
         //change this later
@@ -45,15 +47,12 @@ public class Inventory {
     public ObservableList<Product> getAllProducts() {
         return this.allProducts;
     }
-public ObservableList<Part> getAllParts(){
+
+    public ObservableList<Part> getAllParts() {
         return this.allParts;
     }
-
-
-//    public ObservableList<Product> getAllProducts(){
-//
-//    }
 }
+
 
 
 /*

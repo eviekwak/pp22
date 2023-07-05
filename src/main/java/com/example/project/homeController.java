@@ -1,5 +1,6 @@
 package com.example.project;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,16 +61,42 @@ public class homeController implements Initializable {
 
     }
 
-    public void ModifyPartsButtonHome(ActionEvent actionEvent) {
+    public void ModifyPartsButtonHome(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyAnyPart.fxml"));
+        root = loader.load();
+        ModifyPartController modifyPartController = loader.getController();
 
-//
-//        System.out.println(randomNumber);
-//        System.out.println("test");
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
 
     }
 
 
     public void DeletePartsButtonHome(ActionEvent actionEvent) {
+        try {
+            System.out.println("kek");
+            String confirmationMsg = "Are you sure you would like to delete this part?";
+            Part partt = PartsTableviewHome.getSelectionModel().getSelectedItem();
+            if(partt != null) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,confirmationMsg, ButtonType.YES, ButtonType.NO);
+                alert.showAndWait();
+
+                if (alert.getResult() == ButtonType.YES) {
+                    Model.getInstance().inventory.deletePart(partt);
+                    alert.close();
+                } else if (alert.getResult() == ButtonType.NO) {
+                    alert.close();
+                }
+
+            }
+
+        }
+        catch (Exception Confirm){
+            AlertMethod("Are you sure you would like to delete this part?");
+        }
     }
 
     public void AddProductsButtonHome(ActionEvent actionEvent) {
@@ -93,4 +120,15 @@ public class homeController implements Initializable {
 
     }
 
-}
+    public void AlertMethod(String x){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.NO) {
+            alert.close();
+        }
+        else if (alert.getResult() == ButtonType.YES) {
+            alert.close();
+            }
+        }
+    }
