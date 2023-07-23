@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -191,7 +192,7 @@ public class homeController implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
-    public void PartsTableViewSearch(ActionEvent event) throws IOException {
+    public void PartsTableViewSearch(KeyEvent keyEvent) throws IOException {
         System.out.println("kek");
     }
     }
