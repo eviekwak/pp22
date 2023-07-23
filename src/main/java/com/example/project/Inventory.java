@@ -13,60 +13,51 @@ public class Inventory {
         this.allParts =  allParts;
     }
 
-    public void addPart(Part newPart) {
+    public void addPart(Part newPart) { //adds a new part at index 0
+
         allParts.add(0, newPart);
     }
-    public void addProduct(Product newProduct) {
-
+    public void addProduct(Product newProduct) { //adds a new product at index 0
+        allProducts.add(0, newProduct);
     }
     public Part lookupPart(int partId){
 
+        return null;
+    }
+    public ObservableList<Part> lookupPart(String partName){
+//allParts.indexOf()
         return null;
     }
     public Product lookupProduct(int partId){
 
         return null;
     }
-    public void updatePart(int index, Part selectedPart){
+    public void updatePart(int index, Part selectedPart){ //updates the part with modifications
 
+         this.allParts.set(index, selectedPart);
     }
-    public void updateProduct(int index, Product newProduct){
+    public void updateProduct(int index, Product newProduct){ //updates the product with modifications
 
+        this.allProducts.set(index, newProduct);
     }
-    public boolean deletePart(Part selectedPart){
-        allParts.remove(selectedPart);
+    public boolean deletePart(Part selectedPart){ //deletes the specified part
+        this.allParts.remove(selectedPart);
         return true; }
 
 
-    public boolean deleteProduct(Product selectedProduct){
+    public boolean deleteProduct(Product selectedProduct){ //deletes the specified product
 
-        //change this later
+        this.allProducts.remove(selectedProduct);
         return true;
     }
 
-    public ObservableList<Product> getAllProducts() {
+    public ObservableList<Product> getAllProducts() { //returns the ObservableList allProducts
+
         return this.allProducts;
     }
 
-    public ObservableList<Part> getAllParts() {
+    public ObservableList<Part> getAllParts() {//returns the ObservableList allParts
+
         return this.allParts;
     }
 }
-
-
-
-/*
-    addPart(newPart:Part):void
-        + addProduct(newProduct:Product):void
-        + lookupPart(partId:int):Part
-        + lookupProduct(productId:int):Product
-        + lookupPart(partName:String):ObservableList<Part>
-+ lookupProduct(productName:String):ObservableList<Product>
-+ updatePart(index:int, selectedPart:Part):void
-        + updateProduct(index:int, newProduct:Product):void
-        + deletePart(selectedPart:Part):boolean
-        + deleteProduct(selectedProduct:Product):boolean
-        + getAllParts():ObservableList<Part>
-+ getAllProducts():ObservableList<Product>
-
- */

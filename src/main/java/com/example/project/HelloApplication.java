@@ -16,9 +16,13 @@ public class HelloApplication extends Application {
 //        Inventory inventory = new Inventory();
    InHouse testInHousePart = new InHouse(Model.getInstance().returnPartID(), "Screw", 5.00, 2, 1,5, 100);
       InHouse test2InHousePart = new InHouse(Model.getInstance().returnPartID(), "yep", 5.00, 2, 1,5, 100);
+      Outsourced testOutPart = new Outsourced(Model.getInstance().returnPartID(), "Outsourced", 65.00, 4, 1, 7, "dirkadirka");
+      Product testProduct = new Product(78, "pro", 68.89, 4, 1, 7);
         Inventory inventory = Model.getInstance().getInventory();
+        inventory.addProduct(testProduct);
         inventory.addPart(testInHousePart);
         inventory.addPart(test2InHousePart);
+        inventory.addPart(testOutPart);
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("home.fxml"));
         Scene scene = new Scene(fxmlLoader);
         //stage.setTitle("Hello!");

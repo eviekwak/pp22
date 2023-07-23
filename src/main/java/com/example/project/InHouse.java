@@ -9,6 +9,6 @@ public class InHouse extends Part {
         super(id, name, price, stock, min, max);
         this.machineId = machineId;
     }
-    public void setMachineId(int machineId) {this.machineId = machineId; }
-    public int getMachineId() {return machineId; }
+    public void setMachineId(int machineId) {this.machineId = machineId; } //sets machineID
+    public int getMachineId() {return machineId; } //gets machineID
 }

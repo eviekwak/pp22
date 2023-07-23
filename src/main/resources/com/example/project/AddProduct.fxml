@@ -42,7 +42,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="451.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="451.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.AddProductController">
   <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0">
          <children>
@@ -50,7 +50,7 @@
             <children>
                   <Pane layoutX="406.0" prefHeight="297.0" prefWidth="575.0">
                      <children>
-                        <TableView layoutY="39.0" prefHeight="111.0" prefWidth="348.0">
+                        <TableView fx:id="AddAssociatedPartTableview" layoutY="39.0" prefHeight="111.0" prefWidth="348.0">
                           <columns>
                             <TableColumn prefWidth="53.0" text="Part ID" />
                             <TableColumn prefWidth="66.0" text="Part Name" />
@@ -58,8 +58,8 @@
                               <TableColumn prefWidth="140.0" text="Price / Cost Per Unit" />
                           </columns>
                         </TableView>
-                        <Button layoutX="295.0" layoutY="156.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="38.0" text="Add" />
-                        <TextField layoutX="211.0" layoutY="8.0" prefWidth="149.0" promptText="Sear" text="Search" />
+                        <Button layoutX="295.0" layoutY="156.0" mnemonicParsing="false" onAction="#AddAssociatedPartButton" prefHeight="25.0" prefWidth="38.0" text="Add" />
+                        <TextField fx:id="AddAssociatedPartSearch" layoutX="211.0" layoutY="8.0" prefWidth="149.0" promptText="Sear" text="Search" />
                         <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -74,7 +74,7 @@
                   </Text>
                   <Pane layoutX="406.0" layoutY="186.0" prefHeight="297.0" prefWidth="575.0">
                      <children>
-                        <TableView layoutY="39.0" prefHeight="111.0" prefWidth="348.0">
+                        <TableView fx:id="RemoveAssociatedPartTableview" layoutY="39.0" prefHeight="111.0" prefWidth="348.0">
                            <columns>
                               <TableColumn prefWidth="53.0" text="Part ID" />
                               <TableColumn prefWidth="66.0" text="Part Name" />
@@ -82,23 +82,23 @@
                               <TableColumn prefWidth="140.0" text="Price / Cost Per Unit" />
                            </columns>
                         </TableView>
-                        <Button layoutX="185.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Remove Associated Part" />
-                        <TextField layoutX="211.0" layoutY="8.0" prefWidth="149.0" promptText="Sear" text="Search" />
+                        <Button layoutX="185.0" layoutY="163.0" mnemonicParsing="false" onAction="#RemoveAssociatedPartButton" prefHeight="25.0" prefWidth="149.0" text="Remove Associated Part" />
+                        <TextField fx:id="RemoveAssociatedPartSearch" layoutX="211.0" layoutY="8.0" prefWidth="149.0" promptText="Sear" text="Search" />
                         <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Text>
-                        <Button layoutX="185.0" layoutY="203.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Save" />
-                        <Button layoutX="272.0" layoutY="203.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Cancel" />
+                        <Button layoutX="185.0" layoutY="203.0" mnemonicParsing="false" onAction="#SaveButton" prefHeight="25.0" prefWidth="76.0" text="Save" />
+                        <Button layoutX="272.0" layoutY="203.0" mnemonicParsing="false" onAction="#CancelButton" prefHeight="25.0" prefWidth="62.0" text="Cancel" />
                      </children>
                   </Pane>
-                  <TextField layoutX="76.0" layoutY="77.0" />
-                  <TextField layoutX="76.0" layoutY="118.0" />
-                  <TextField layoutX="76.0" layoutY="157.0" prefHeight="25.0" prefWidth="85.0" />
-                  <TextField layoutX="76.0" layoutY="230.0" prefHeight="25.0" prefWidth="85.0" />
-                  <TextField layoutX="76.0" layoutY="194.0" prefHeight="25.0" prefWidth="85.0" />
-                  <TextField layoutX="225.0" layoutY="230.0" prefHeight="25.0" prefWidth="85.0" />
+                  <TextField fx:id="IDField" layoutX="76.0" layoutY="77.0" />
+                  <TextField fx:id="NameField" layoutX="76.0" layoutY="118.0" />
+                  <TextField fx:id="InvField" layoutX="76.0" layoutY="157.0" prefHeight="25.0" prefWidth="85.0" />
+                  <TextField fx:id="MaxField" layoutX="76.0" layoutY="230.0" prefHeight="25.0" prefWidth="85.0" />
+                  <TextField fx:id="PriceField" layoutX="76.0" layoutY="194.0" prefHeight="25.0" prefWidth="85.0" />
+                  <TextField fx:id="MinField" layoutX="225.0" layoutY="230.0" prefHeight="25.0" prefWidth="85.0" />
                   <Text layoutX="26.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
                   <Text layoutX="24.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
                   <Text layoutX="24.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inv" />

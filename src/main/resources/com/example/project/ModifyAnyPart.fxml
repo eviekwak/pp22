@@ -52,7 +52,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <RadioButton fx:id="InhouseRadioButton" layoutX="133.0" layoutY="17.0" mnemonicParsing="false" selected="true" text="In-house">
+                  <RadioButton fx:id="InhouseRadioButton" disable="true" layoutX="133.0" layoutY="17.0" mnemonicParsing="false" text="In-house">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -60,7 +60,7 @@
                         <ToggleGroup fx:id="ModifyPartToggle" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="OutsourcedRadioButton" layoutX="230.0" layoutY="17.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$ModifyPartToggle">
+                  <RadioButton fx:id="OutsourcedRadioButton" disable="true" layoutX="230.0" layoutY="17.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$ModifyPartToggle">
                      <font>
                         <Font size="14.0" />
                      </font>

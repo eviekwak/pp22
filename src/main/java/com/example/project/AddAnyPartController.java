@@ -43,12 +43,18 @@ private Scene scene;
     IHOutsourcedRadioButton.setToggleGroup(AddPartToggle);
     }
 
-    public void SaveInhouseButton(ActionEvent actionEvent) {
+    /**
+     *
+     * @param actionEvent is when the save button is clicked.
+     * This method grabs the text from the input fields,
+     * throws exceptions based on required limits,
+     * Then adds either an inhouse or outsourced part.
+     */
+    public void SaveButton(ActionEvent actionEvent) {
 
         try {
 
-            Integer x = 5;
-
+            //this block grabs the text from the input fields
             System.out.println(IHIDField.getText());
             String inputName = IHNameField.getText();
             Double inputPrice = Double.parseDouble(IHPriceField.getText());
@@ -57,19 +63,20 @@ private Scene scene;
             Integer inputMax = Integer.parseInt(IHMaxField.getText());
             String inputMachineID = IHMachineIDField.getText();
 
+            //throws exceptions based on required limits
             if (inputMin > inputMax){
                 throw new Exception("Min should be less than Max ");}
             if (inputInv < inputMin || inputInv > inputMax){
                 throw new Exception("Inv must be between Min and Max ");
             }
 
-//        Outsourced testy = new Outsourced()
-
+            //adds inhouse part
             if (IHInhouseRadioButton.isSelected()){
 
             InHouse newPart = new InHouse(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin,inputMax, Integer.parseInt(inputMachineID));
             Model.getInstance().getInventory().addPart(newPart);
         }
+            //adds outsourced part
         else if (IHOutsourcedRadioButton.isSelected()){
             Outsourced newPart = new Outsourced(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin,inputMax, inputMachineID);
             Model.getInstance().getInventory().addPart(newPart);
@@ -88,7 +95,11 @@ private Scene scene;
 
     }
 
-    public void CancelInhouseButton(ActionEvent event) throws IOException {
+    /**
+     * @param event is when the button is clicked.
+     * Returns to home page.
+     */
+    public void CancelButton(ActionEvent event) throws IOException { //returns to home page
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
         root = loader.load();
@@ -100,6 +111,10 @@ private Scene scene;
 
     }
 
+    /**
+     * Changes the text label based on
+     * which radio button is currently selected.
+     */
     public void ListenRadio(ActionEvent ev){
         if (IHInhouseRadioButton.isSelected()) {
         RadioTextChange.setText("Machine ID");
@@ -108,6 +123,12 @@ private Scene scene;
         RadioTextChange.setText("Company Name");
         }
     }
+
+    /**
+     *
+     * @param x is the specified error message.
+     * Pops up a confirmation type alert with error message and OK button.
+     */
     public void AlertMethod(String x){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.OK);
         alert.showAndWait();
@@ -115,5 +136,9 @@ private Scene scene;
         if (alert.getResult() == ButtonType.OK) {
             alert.close();
         }
+    }
+    public void ExitButton(ActionEvent event) throws IOException {
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

@@ -30,13 +30,18 @@ public class homeController implements Initializable {
     @FXML
     public TableColumn<Part, String> PartNameColumnHome, PartPriceColumnHome;
 
-
-
-
     @FXML
     private TableView<Part> PartsTableviewHome;
     @FXML
     private TableColumn<Part, Integer> PartIDColumnHome, PartInventLvlColumnHome;
+
+    @FXML
+    public TableColumn<Product, String> ProductNameColumnHome, ProductPriceColumnHome;
+    @FXML
+    private TableView<Product> ProductsTableviewHome;
+    @FXML
+    private TableColumn<Product, Integer> ProductIDColumnHome, ProductInventLvlColumnHome;
+
 
     @FXML
     public void AddPartsButtonHome(ActionEvent event) throws IOException {
@@ -62,6 +67,9 @@ public class homeController implements Initializable {
     }
 
     public void ModifyPartsButtonHome(ActionEvent actionEvent) throws IOException {
+        Model.getInstance().setPartIndexToBeModified(
+                Model.getInstance().inventory.getAllParts().indexOf(
+                        PartsTableviewHome.getSelectionModel().getSelectedItem()));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyAnyPart.fxml"));
         root = loader.load();
         ModifyPartController modifyPartController = loader.getController();
@@ -77,7 +85,6 @@ public class homeController implements Initializable {
 
     public void DeletePartsButtonHome(ActionEvent actionEvent) {
         try {
-            System.out.println("kek");
             String confirmationMsg = "Are you sure you would like to delete this part?";
             Part partt = PartsTableviewHome.getSelectionModel().getSelectedItem();
             if(partt != null) {
@@ -99,13 +106,56 @@ public class homeController implements Initializable {
         }
     }
 
-    public void AddProductsButtonHome(ActionEvent actionEvent) {
+    public void AddProductsButtonHome(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
+        root = loader.load();
+        AddProductController addProductController = loader.getController();
+
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        //stage.setTitle("Hello!");
+
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void ModifyProductsButtonHome(ActionEvent actionEvent) {
+    public void ModifyProductsButtonHome(ActionEvent actionEvent) throws IOException {
+        Model.getInstance().setProductIndexToBeModified(
+                Model.getInstance().inventory.getAllProducts().indexOf(
+                        ProductsTableviewHome.getSelectionModel().getSelectedItem()));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));
+        root = loader.load();
+        ModifyProductController modifyProductController = loader.getController();
+
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        //stage.setTitle("Hello!");
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void DeleteProductsButtonHome(ActionEvent actionEvent) {
+        try {
+        String confirmationMsg = "Are you sure you would like to delete this part?";
+        Product producto = ProductsTableviewHome.getSelectionModel().getSelectedItem();
+        if(producto != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,confirmationMsg, ButtonType.YES, ButtonType.NO);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+                Model.getInstance().inventory.deleteProduct(producto);
+                alert.close();
+            } else if (alert.getResult() == ButtonType.NO) {
+                alert.close();
+            }
+
+        }
+
+    }
+    catch (Exception Confirm){
+        AlertMethod("Are you sure you would like to delete this part?");
+    }
     }
 
 
@@ -117,6 +167,12 @@ public class homeController implements Initializable {
         PartInventLvlColumnHome.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
         PartPriceColumnHome.setCellValueFactory(new PropertyValueFactory<>("price"));
         PartsTableviewHome.setItems(Model.getInstance().getInventory().getAllParts());
+
+        ProductIDColumnHome.setCellValueFactory(new PropertyValueFactory<Product, Integer>("id"));
+        ProductNameColumnHome.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+        ProductInventLvlColumnHome.setCellValueFactory(new PropertyValueFactory<Product, Integer>("stock"));
+        ProductPriceColumnHome.setCellValueFactory(new PropertyValueFactory<>("price"));
+        ProductsTableviewHome.setItems(Model.getInstance().getInventory().getAllProducts());
 
     }
 
@@ -131,4 +187,11 @@ public class homeController implements Initializable {
             alert.close();
             }
         }
+    public void ExitButton(ActionEvent event) throws IOException {
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+    public void PartsTableViewSearch(ActionEvent event) throws IOException {
+        System.out.println("kek");
+    }
     }
