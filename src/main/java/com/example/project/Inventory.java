@@ -6,58 +6,69 @@ import javafx.collections.ObservableList;
 
 public class Inventory {
 
-    private ObservableList<Part> allParts =  FXCollections.observableArrayList();
-    private ObservableList<Product> allProducts =  FXCollections.observableArrayList();
+    private ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     public Inventory() {
-        this.allParts =  allParts;
+        this.allParts = allParts;
     }
 
     public void addPart(Part newPart) { //adds a new part at index 0
 
         allParts.add(0, newPart);
     }
+
     public void addProduct(Product newProduct) { //adds a new product at index 0
         allProducts.add(0, newProduct);
     }
-    public Part lookupPart(int partId){
+
+    public Part lookupPart(int partId) {
 
         return null;
     }
-    public ObservableList<Part> lookupPart(String partName){
+
+    public ObservableList<Part> lookupPart(String partName) {
 //allParts.indexOf()
         return null;
     }
-    public Product lookupProduct(int partId){
+
+    public Product lookupProduct(int partId) {
 
         return null;
     }
-    public void updatePart(int index, Part selectedPart){ //updates the part with modifications
 
-         this.allParts.set(index, selectedPart);
+    public ObservableList<Product> lookupProduct(String productName) {
+        return null;
+
     }
-    public void updateProduct(int index, Product newProduct){ //updates the product with modifications
+        public void updatePart ( int index, Part selectedPart){ //updates the part with modifications
 
-        this.allProducts.set(index, newProduct);
-    }
-    public boolean deletePart(Part selectedPart){ //deletes the specified part
-        this.allParts.remove(selectedPart);
-        return true; }
+            this.allParts.set(index, selectedPart);
+        }
+        public void updateProduct ( int index, Product newProduct){ //updates the product with modifications
+
+            this.allProducts.set(index, newProduct);
+        }
+        public boolean deletePart (Part selectedPart){ //deletes the specified part
+            this.allParts.remove(selectedPart);
+            return true;
+        }
 
 
-    public boolean deleteProduct(Product selectedProduct){ //deletes the specified product
+        public boolean deleteProduct (Product selectedProduct){ //deletes the specified product
 
-        this.allProducts.remove(selectedProduct);
-        return true;
-    }
+            this.allProducts.remove(selectedProduct);
+            return true;
+        }
 
-    public ObservableList<Product> getAllProducts() { //returns the ObservableList allProducts
+        public ObservableList<Product> getAllProducts () { //returns the ObservableList allProducts
 
-        return this.allProducts;
-    }
+            return this.allProducts;
+        }
 
-    public ObservableList<Part> getAllParts() {//returns the ObservableList allParts
+        public ObservableList<Part> getAllParts () {//returns the ObservableList allParts
 
-        return this.allParts;
-    }
+            return this.allParts;
+        }
+
 }

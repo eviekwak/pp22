@@ -1,11 +1,13 @@
 package com.example.project;
 
+import javafx.collections.ObservableList;
+
 /**
  *
  * @author Evie Kwak
  */
 public class Product {
-    //private associatedParts<Part>;
+    private ObservableList<Part> associatedParts;
     private int id;
     private String name;
     private double price;
@@ -104,9 +106,16 @@ public class Product {
         this.max = max;
     }
 
-    // public void addAssociatedPark(Part part){}}
+    public void addAssociatedPark(Part part){
+        this.associatedParts.add(part);
+    }
 
-    //  public boolean deleteAssociatedPart(Part selectedAssociatedPart){}
+    public boolean deleteAssociatedPart(Part selectedAssociatedPart){
+        this.associatedParts.remove(selectedAssociatedPart);
+        return true;
+    }
 
-    //public ObservableList<Part> getAllAssociatedParts(){};
+    public ObservableList<Part> getAllAssociatedParts(){
+        return this.associatedParts;
+    }
 }

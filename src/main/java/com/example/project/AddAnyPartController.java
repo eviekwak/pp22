@@ -41,6 +41,8 @@ private Scene scene;
     ToggleGroup AddPartToggle = new ToggleGroup();
     IHInhouseRadioButton.setToggleGroup(AddPartToggle);
     IHOutsourcedRadioButton.setToggleGroup(AddPartToggle);
+    int predeterminedID = Model.getInstance().returnPartID();
+    IHIDField.setText(String.valueOf(predeterminedID));
     }
 
     /**
