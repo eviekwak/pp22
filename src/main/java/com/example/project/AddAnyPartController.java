@@ -75,7 +75,7 @@ private Scene scene;
             //adds inhouse part
             if (IHInhouseRadioButton.isSelected()){
 
-            InHouse newPart = new InHouse(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin,inputMax, Integer.parseInt(inputMachineID));
+            InHouse newPart = new InHouse(Integer.parseInt(IHIDField.getText()), inputName, inputPrice, inputInv, inputMin,inputMax, Integer.parseInt(inputMachineID));
             Model.getInstance().getInventory().addPart(newPart);
         }
             //adds outsourced part
