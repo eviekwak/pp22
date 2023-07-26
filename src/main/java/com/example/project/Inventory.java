@@ -35,14 +35,16 @@ public class Inventory {
             }
 
         }
-        
+        System.out.println(lookedupPartId);
         return lookedupPartId;
     }
 
     public ObservableList<Part> lookupPart(String partName) {
+
         System.out.println("lookup part string");
 //allParts.indexOf()
         ObservableList<Part> newPartsList = FXCollections.observableArrayList();
+
         for (Part searchedPart : getAllParts()){
             if (searchedPart.getName().toLowerCase().contains(partName.toLowerCase())){
                 System.out.println("we got a match");
@@ -50,6 +52,7 @@ public class Inventory {
             }
 
         }
+        System.out.println(newPartsList);
         return newPartsList;
     }
 
