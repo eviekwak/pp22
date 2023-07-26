@@ -23,13 +23,34 @@ public class Inventory {
     }
 
     public Part lookupPart(int partId) {
+        System.out.println("lookup part int");
+        
+        Part lookedupPartId = null;
+        for (Part searchedPart : getAllParts()){
+            if (searchedPart.getId() == partId){
 
-        return null;
+                System.out.println("we got a match");
+                lookedupPartId = searchedPart;
+                return lookedupPartId;
+            }
+
+        }
+        
+        return lookedupPartId;
     }
 
     public ObservableList<Part> lookupPart(String partName) {
+        System.out.println("lookup part string");
 //allParts.indexOf()
-        return null;
+        ObservableList<Part> newPartsList = FXCollections.observableArrayList();
+        for (Part searchedPart : getAllParts()){
+            if (searchedPart.getName().toLowerCase().contains(partName.toLowerCase())){
+                System.out.println("we got a match");
+                newPartsList.add(searchedPart);
+            }
+
+        }
+        return newPartsList;
     }
 
     public Product lookupProduct(int partId) {

@@ -1,5 +1,6 @@
 package com.example.project;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,6 +31,9 @@ public class homeController implements Initializable {
 
     @FXML
     public TableColumn<Part, String> PartNameColumnHome, PartPriceColumnHome;
+
+    @FXML
+    private TextField PartsTableviewSearchHome;
 
     @FXML
     private TableView<Part> PartsTableviewHome;
@@ -193,6 +197,24 @@ public class homeController implements Initializable {
         stage.close();
     }
     public void PartsTableViewSearch(KeyEvent keyEvent) throws IOException {
-        System.out.println("kek");
+
+        try{
+            int intPart = Integer.parseInt(PartsTableviewSearchHome.getText());
+            System.out.println("It's an int! hopefully");
+
+            ObservableList<Part> newPartsList = FXCollections.observableArrayList();
+            newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+            PartsTableviewHome.setItems(newPartsList);
+
+
+        }
+        catch(Exception E){
+            System.out.println("It's probably a string");
+            String partsText = PartsTableviewSearchHome.getText();
+            ObservableList<Part> newPartsList = Model.getInstance().inventory.lookupPart(partsText);
+            PartsTableviewHome.setItems(newPartsList);
+        }
+
+
     }
     }

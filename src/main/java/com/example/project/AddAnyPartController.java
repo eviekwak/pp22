@@ -80,7 +80,7 @@ private Scene scene;
         }
             //adds outsourced part
         else if (IHOutsourcedRadioButton.isSelected()){
-            Outsourced newPart = new Outsourced(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin,inputMax, inputMachineID);
+            Outsourced newPart = new Outsourced(Integer.parseInt(IHIDField.getText()), inputName, inputPrice, inputInv, inputMin,inputMax, inputMachineID);
             Model.getInstance().getInventory().addPart(newPart);
         }
 
