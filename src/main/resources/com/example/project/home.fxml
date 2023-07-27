@@ -71,6 +71,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Text>
+                        <Text fx:id="SearchPartsMessage" layoutX="103.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                   </Pane>
                   <Pane layoutX="405.0" layoutY="95.0" prefHeight="297.0" prefWidth="575.0">

@@ -36,6 +36,8 @@ public class homeController implements Initializable {
     private TextField PartsTableviewSearchHome;
 
     @FXML
+    private Text SearchPartsMessage;
+    @FXML
     private TableView<Part> PartsTableviewHome;
     @FXML
     private TableColumn<Part, Integer> PartIDColumnHome, PartInventLvlColumnHome;
@@ -198,14 +200,29 @@ public class homeController implements Initializable {
     }
     public void PartsTableViewSearch(KeyEvent keyEvent) throws IOException {
 
+        SearchPartsMessage.setText("");
         try{
+
             int intPart = Integer.parseInt(PartsTableviewSearchHome.getText());
-            System.out.println("It's an int! hopefully");
 
-            ObservableList<Part> newPartsList = FXCollections.observableArrayList();
-            newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
-            PartsTableviewHome.setItems(newPartsList);
+            if(howManyDigits(intPart)<4) {
 
+                ObservableList<Part> newPartsList = FXCollections.observableArrayList();
+                newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+
+                SearchPartsMessage.setText("");
+                PartsTableviewHome.setItems(newPartsList);
+            }
+            else{
+                SearchPartsMessage.setText("ID is too long, did not find");
+            }
+
+
+//            System.out.println(PartsTableviewHome.getItems().toArray().length);
+//            if(PartsTableviewHome.getItems().){
+//                System.out.println("NEWPARTLIST IS NULL!");
+//            }
+//            else{System.out.println("NEWPARTLIST ISnt NULL!"); }
 
         }
         catch(Exception E){
@@ -216,5 +233,14 @@ public class homeController implements Initializable {
         }
 
 
+
+    }
+    int howManyDigits(int x) {
+        int digits = 0;
+        while(x!=0) {
+            x=x/10;
+            digits++;
+        }
+        return digits;
     }
     }
