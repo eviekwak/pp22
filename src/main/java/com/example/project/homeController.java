@@ -39,6 +39,8 @@ public class homeController implements Initializable {
     private TableView<Part> PartsTableviewHome;
     @FXML
     private TableColumn<Part, Integer> PartIDColumnHome, PartInventLvlColumnHome;
+    @FXML
+    private Text PartsTableSearchMessage, ProductsTableSearchMessage;
 
     @FXML
     public TableColumn<Product, String> ProductNameColumnHome, ProductPriceColumnHome;
@@ -200,19 +202,28 @@ public class homeController implements Initializable {
 
         try{
             int intPart = Integer.parseInt(PartsTableviewSearchHome.getText());
-            System.out.println("It's an int! hopefully");
-
             ObservableList<Part> newPartsList = FXCollections.observableArrayList();
             newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
             PartsTableviewHome.setItems(newPartsList);
+            ObservableList<Part> testy = newPartsList;
+
+            if (newPartsList.isEmpty()){
+                PartsTableSearchMessage.setText("No results found!");}
+            else{
+                PartsTableSearchMessage.setText("");}
+            }
 
 
-        }
+
         catch(Exception E){
-            System.out.println("It's probably a string");
             String partsText = PartsTableviewSearchHome.getText();
             ObservableList<Part> newPartsList = Model.getInstance().inventory.lookupPart(partsText);
             PartsTableviewHome.setItems(newPartsList);
+            if (newPartsList.isEmpty()){
+                PartsTableSearchMessage.setText("No results found!");}
+            else{
+                PartsTableSearchMessage.setText("");
+            }
         }
 
 

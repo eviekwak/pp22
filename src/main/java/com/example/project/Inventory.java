@@ -23,36 +23,32 @@ public class Inventory {
     }
 
     public Part lookupPart(int partId) {
-        System.out.println("lookup part int");
         
         Part lookedupPartId = null;
         for (Part searchedPart : getAllParts()){
             if (searchedPart.getId() == partId){
 
-                System.out.println("we got a match");
                 lookedupPartId = searchedPart;
                 return lookedupPartId;
             }
 
         }
-        System.out.println(lookedupPartId);
         return lookedupPartId;
     }
 
     public ObservableList<Part> lookupPart(String partName) {
 
-        System.out.println("lookup part string");
 //allParts.indexOf()
         ObservableList<Part> newPartsList = FXCollections.observableArrayList();
 
         for (Part searchedPart : getAllParts()){
             if (searchedPart.getName().toLowerCase().contains(partName.toLowerCase())){
-                System.out.println("we got a match");
+
+
                 newPartsList.add(searchedPart);
             }
 
         }
-        System.out.println(newPartsList);
         return newPartsList;
     }
 
