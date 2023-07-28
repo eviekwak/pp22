@@ -47,6 +47,8 @@ public class homeController implements Initializable {
     @FXML
     private TableView<Product> ProductsTableviewHome;
     @FXML
+    private Text PartsTableSearchMessage, ProductsTableSearchMessage;
+    @FXML
     private TableColumn<Product, Integer> ProductIDColumnHome, ProductInventLvlColumnHome;
 
 
