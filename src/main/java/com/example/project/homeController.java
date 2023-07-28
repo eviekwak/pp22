@@ -36,8 +36,6 @@ public class homeController implements Initializable {
     private TextField PartsTableviewSearchHome;
 
     @FXML
-    private Text SearchPartsMessage;
-    @FXML
     private TableView<Part> PartsTableviewHome;
     @FXML
     private TableColumn<Part, Integer> PartIDColumnHome, PartInventLvlColumnHome;
@@ -202,7 +200,7 @@ public class homeController implements Initializable {
     }
     public void PartsTableViewSearch(KeyEvent keyEvent) throws IOException {
 
-        SearchPartsMessage.setText("");
+        PartsTableSearchMessage.setText("");
         try{
 
             int intPart = Integer.parseInt(PartsTableviewSearchHome.getText());
@@ -212,11 +210,11 @@ public class homeController implements Initializable {
                 ObservableList<Part> newPartsList = FXCollections.observableArrayList();
                 newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
 
-                SearchPartsMessage.setText("");
+                PartsTableSearchMessage.setText("");
                 PartsTableviewHome.setItems(newPartsList);
             }
             else{
-                SearchPartsMessage.setText("ID is too long, did not find");
+                PartsTableSearchMessage.setText("ID is too long, did not find");
             }
 
 
