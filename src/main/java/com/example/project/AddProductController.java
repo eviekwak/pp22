@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
@@ -61,48 +58,83 @@ public class AddProductController implements Initializable {
 
     }
 
-    public void SaveButton(ActionEvent actionEvent) {
+    public void SaveButton(ActionEvent actionEvent) throws IOException {
+        try {
+
+            //this block grabs the text from the input fields
+            System.out.println(IDField.getText());
+            String inputName = NameField.getText();
+            Double inputPrice = Double.parseDouble(PriceField.getText());
+            Integer inputInv = Integer.parseInt(InvField.getText());
+            Integer inputMin = Integer.parseInt(MinField.getText());
+            Integer inputMax = Integer.parseInt(MaxField.getText());
+
+            Product newProduct = new Product(Integer.parseInt(IDField.getText()), inputName, inputPrice, inputInv, inputMin,inputMax);
+            //TO DO
+//            newProduct.
+            Model.getInstance().getInventory().addProduct(newProduct);
 
 
-    }
+            //throws exceptions based on required limits
+            if (inputMin > inputMax) {
+                throw new Exception("Min should be less than Max ");
+            }
+            if (inputInv < inputMin || inputInv > inputMax) {
+                throw new Exception("Inv must be between Min and Max ");
+            }
 
-    /**
-     * @param event is when the button is clicked.
-     *              Returns to home page.
-     */
-    public void CancelButton(ActionEvent event) throws IOException { //returns to home page
+        } catch (NumberFormatException nfe) {
+            AlertMethod("The input " + nfe.getMessage() + "was the wrong data type.");
+        }
+        catch (Exception wrongType) {
+            AlertMethod("Something went wrong " + wrongType);
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
         root = loader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         //stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-
     }
 
-    public void AddAssociatedPartButton(ActionEvent actionEvent) {
+        /**
+         * @param event is when the button is clicked.
+         *              Returns to home page.
+         */
+        public void CancelButton (ActionEvent event) throws IOException { //returns to home page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            //stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
 
-        Part selectedPart = AddAssociatedPartTableview.getSelectionModel().getSelectedItem();
-        AssociatedPartsList.add(selectedPart);
-        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
-    }
+        }
 
-    public void RemoveAssociatedPartButton(ActionEvent actionEvent) {
-        Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();
-        AssociatedPartsList.remove(selectedPart);
-        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
-    }
+        public void AddAssociatedPartButton (ActionEvent actionEvent){
 
-    public void ExitButton(ActionEvent event) throws IOException {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
+            Part selectedPart = AddAssociatedPartTableview.getSelectionModel().getSelectedItem();
+            AssociatedPartsList.add(selectedPart);
+            RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+        }
 
-    public void AddAllPartsSearch(KeyEvent keyEvent) {
-    }
+        public void RemoveAssociatedPartButton (ActionEvent actionEvent){
+            Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();
+            AssociatedPartsList.remove(selectedPart);
+            RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+        }
 
-    public void AddAssociatedPartsSearch(KeyEvent keyEvent) {
+        public void ExitButton (ActionEvent event) throws IOException {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }
+
+        public void AddAllPartsSearch (KeyEvent keyEvent){
+        }
+
+        public void AddAssociatedPartsSearch (KeyEvent keyEvent){
 //        PartsTableSearchMessage.setText("");
 //        try {
 //
@@ -154,5 +186,14 @@ public class AddProductController implements Initializable {
 //            PartsTableviewHome.setItems(newPartsList);
 //        }
 //    }
+        }
+
+    public void AlertMethod(String x) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.OK);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
     }
 }

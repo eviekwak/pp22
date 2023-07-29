@@ -91,7 +91,7 @@ private Scene scene;
 
         }
         catch (Exception wrongType) {
-        AlertMethod("Something went wrong" + wrongType);
+        AlertMethod("Something went wrong " + wrongType);
     }
 
 

@@ -42,7 +42,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="451.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.AddProductController">
+<VBox prefHeight="451.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.ModifyProductController">
   <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0">
          <children>
@@ -52,20 +52,19 @@
                      <children>
                         <TableView fx:id="AddAssociatedPartTableview" layoutY="39.0" prefHeight="111.0" prefWidth="348.0">
                           <columns>
-                            <TableColumn fx:id="AllPartsPartIDColumn" prefWidth="53.0" text="Part ID" />
-                            <TableColumn fx:id="AllPartsNameColumn" prefWidth="66.0" text="Part Name" />
-                              <TableColumn fx:id="AllPartsInvColumn" prefWidth="96.0" text="Inventory Level" />
-                              <TableColumn fx:id="AllPartsPriceColumn" prefWidth="140.0" text="Price / Cost Per Unit" />
+                            <TableColumn prefWidth="53.0" text="Part ID" />
+                            <TableColumn prefWidth="66.0" text="Part Name" />
+                              <TableColumn prefWidth="96.0" text="Inventory Level" />
+                              <TableColumn prefWidth="140.0" text="Price / Cost Per Unit" />
                           </columns>
                         </TableView>
                         <Button layoutX="295.0" layoutY="156.0" mnemonicParsing="false" onAction="#AddAssociatedPartButton" prefHeight="25.0" prefWidth="38.0" text="Add" />
-                        <TextField fx:id="AddAssociatedPartSearch" layoutX="211.0" layoutY="8.0" onKeyReleased="#AddAllPartsSearch" prefWidth="149.0" promptText="Search" />
+                        <TextField fx:id="AddAssociatedPartSearch" layoutX="211.0" layoutY="8.0" prefWidth="149.0" promptText="Sear" text="Search" />
                         <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Text>
-                        <Text fx:id="AllPartsSearchMessage" layoutX="97.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                   </Pane>
                   <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Product">
@@ -77,14 +76,14 @@
                      <children>
                         <TableView fx:id="RemoveAssociatedPartTableview" layoutY="39.0" prefHeight="111.0" prefWidth="348.0">
                            <columns>
-                              <TableColumn fx:id="AssociatedPartsPartIDColumn" prefWidth="53.0" text="Part ID" />
-                              <TableColumn fx:id="AssociatedPartsPartNameColumn" prefWidth="66.0" text="Part Name" />
-                              <TableColumn fx:id="AssociatedPartsInvColumn" prefWidth="96.0" text="Inventory Level" />
-                              <TableColumn fx:id="AssociatedPartsPriceColumn" prefWidth="140.0" text="Price / Cost Per Unit" />
+                              <TableColumn prefWidth="53.0" text="Part ID" />
+                              <TableColumn prefWidth="66.0" text="Part Name" />
+                              <TableColumn prefWidth="96.0" text="Inventory Level" />
+                              <TableColumn prefWidth="140.0" text="Price / Cost Per Unit" />
                            </columns>
                         </TableView>
                         <Button layoutX="185.0" layoutY="163.0" mnemonicParsing="false" onAction="#RemoveAssociatedPartButton" prefHeight="25.0" prefWidth="149.0" text="Remove Associated Part" />
-                        <TextField fx:id="RemoveAssociatedPartSearch" layoutX="211.0" layoutY="8.0" onKeyReleased="#AddAssociatedPartsSearch" prefWidth="149.0" promptText="Search" />
+                        <TextField fx:id="RemoveAssociatedPartSearch" layoutX="211.0" layoutY="8.0" prefWidth="149.0" promptText="Sear" text="Search" />
                         <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -92,10 +91,9 @@
                         </Text>
                         <Button layoutX="185.0" layoutY="203.0" mnemonicParsing="false" onAction="#SaveButton" prefHeight="25.0" prefWidth="76.0" text="Save" />
                         <Button layoutX="272.0" layoutY="203.0" mnemonicParsing="false" onAction="#CancelButton" prefHeight="25.0" prefWidth="62.0" text="Cancel" />
-                        <Text fx:id="AssociatedPartsSearchMessage" layoutX="89.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                   </Pane>
-                  <TextField fx:id="IDField" editable="false" layoutX="76.0" layoutY="77.0" />
+                  <TextField fx:id="IDField" layoutX="76.0" layoutY="77.0" />
                   <TextField fx:id="NameField" layoutX="76.0" layoutY="118.0" />
                   <TextField fx:id="InvField" layoutX="76.0" layoutY="157.0" prefHeight="25.0" prefWidth="85.0" />
                   <TextField fx:id="MaxField" layoutX="76.0" layoutY="230.0" prefHeight="25.0" prefWidth="85.0" />
@@ -109,7 +107,7 @@
                   <Text layoutX="181.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min" />
             </children>
           </AnchorPane>
-            <Button layoutX="788.0" layoutY="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" text="X">
+            <Button layoutX="788.0" layoutY="2.0" mnemonicParsing="false" onAction="#ExitButton" prefHeight="20.0" prefWidth="24.0" text="X">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
