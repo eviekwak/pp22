@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,10 +21,7 @@ public class AddProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Initialized addanypart");
-        ToggleGroup AddPartToggle = new ToggleGroup();
-        IHInhouseRadioButton.setToggleGroup(AddPartToggle);
-        IHOutsourcedRadioButton.setToggleGroup(AddPartToggle);
+        System.out.println("Initialized addanyproduct");
         int predeterminedID = Model.getInstance().returnProductID();
         IHIDField.setText(String.valueOf(predeterminedID));
     }
@@ -56,5 +54,11 @@ public class AddProductController implements Initializable {
     public void ExitButton(ActionEvent event) throws IOException {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    public void AddAllPartsSearch(KeyEvent keyEvent) {
+    }
+
+    public void AddAssociatedPartsSearch(KeyEvent keyEvent) {
     }
 }
