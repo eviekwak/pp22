@@ -83,7 +83,7 @@
                                 <Button layoutX="196.0" layoutY="260.0" mnemonicParsing="false" onAction="#AddProductsButtonHome" text="Add" />
                                 <Button layoutX="241.0" layoutY="259.0" mnemonicParsing="false" onAction="#ModifyProductsButtonHome" text="Modify" />
                                 <Button layoutX="302.0" layoutY="259.0" mnemonicParsing="false" onAction="#DeleteProductsButtonHome" text="Delete" />
-                                <TextField fx:id="ProductsTableviewSearchHome" layoutX="211.0" layoutY="8.0" promptText="Search" />
+                                <TextField fx:id="ProductsTableviewSearchHome" layoutX="211.0" layoutY="8.0" onKeyReleased="#ProductsTableViewSearch" promptText="Search" />
                                 <Text layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products">
                                     <font>
                                         <Font name="System Bold" size="15.0" />

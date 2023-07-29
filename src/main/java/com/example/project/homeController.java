@@ -33,7 +33,7 @@ public class homeController implements Initializable {
     public TableColumn<Part, String> PartNameColumnHome, PartPriceColumnHome;
 
     @FXML
-    private TextField PartsTableviewSearchHome;
+    private TextField PartsTableviewSearchHome, ProductsTableviewSearchHome;
 
     @FXML
     private TableView<Part> PartsTableviewHome;
@@ -205,17 +205,22 @@ public class homeController implements Initializable {
 
             int intPart = Integer.parseInt(PartsTableviewSearchHome.getText());
 
-            if(howManyDigits(intPart)<4) {
+            throw null;
+//
+//            if(howManyDigits(intPart)<4) {
 
-                ObservableList<Part> newPartsList = FXCollections.observableArrayList();
-                newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
-
-                PartsTableSearchMessage.setText("");
-                PartsTableviewHome.setItems(newPartsList);
-            }
-            else{
-                PartsTableSearchMessage.setText("ID is too long, did not find");
-            }
+//                ObservableList<Part> newPartsList = FXCollections.observableArrayList();
+//                newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+//
+//                PartsTableSearchMessage.setText("");
+//                if (newPartsList.get(0).getId() == null){
+//                    PartsTableSearchMessage.setText("No results found!");
+//                }
+//                PartsTableviewHome.setItems(newPartsList);
+//            }
+//            else{
+//                PartsTableSearchMessage.setText("ID is too long, did not find");
+//            }
 
 
 //            System.out.println(PartsTableviewHome.getItems().toArray().length);
@@ -225,16 +230,62 @@ public class homeController implements Initializable {
 //            else{System.out.println("NEWPARTLIST ISnt NULL!"); }
 
         }
+        catch(NullPointerException e){
+            int intPart = Integer.parseInt(PartsTableviewSearchHome.getText());
+            ObservableList<Part> newPartsList = FXCollections.observableArrayList();
+            newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+
+            PartsTableSearchMessage.setText("");
+            if (newPartsList.get(0) == null){
+                PartsTableSearchMessage.setText("No results found!");
+            }
+            PartsTableviewHome.setItems(newPartsList);
+        }
         catch(Exception E){
             System.out.println("It's probably a string");
             String partsText = PartsTableviewSearchHome.getText();
             ObservableList<Part> newPartsList = Model.getInstance().inventory.lookupPart(partsText);
+            if (newPartsList.isEmpty()){
+                PartsTableSearchMessage.setText("No results found!");}
+            else{
+                PartsTableSearchMessage.setText("");}
             PartsTableviewHome.setItems(newPartsList);
         }
+        }
 
+    public void ProductsTableViewSearch(KeyEvent keyEvent) throws IOException {
 
+        ProductsTableSearchMessage.setText("");
+        try{
 
+            int intProduct = Integer.parseInt(ProductsTableviewSearchHome.getText());
+
+            throw null;
+
+        }
+        catch(NullPointerException e){
+            int intProduct = Integer.parseInt(ProductsTableviewSearchHome.getText());
+            ObservableList<Product> newProductsList = FXCollections.observableArrayList();
+            newProductsList.add(Model.getInstance().inventory.lookupProduct(intProduct));
+
+            ProductsTableSearchMessage.setText("");
+            if (newProductsList.get(0) == null){
+                ProductsTableSearchMessage.setText("No results found!");
+            }
+            ProductsTableviewHome.setItems(newProductsList);
+        }
+        catch(Exception E){
+            String productsText = ProductsTableviewSearchHome.getText();
+            ObservableList<Product> newProductsList = Model.getInstance().inventory.lookupProduct(productsText);
+            if (newProductsList.isEmpty()){
+                ProductsTableSearchMessage.setText("No results found!");}
+            else{
+                ProductsTableSearchMessage.setText("");}
+            ProductsTableviewHome.setItems(newProductsList);
+        }
     }
+
+
     int howManyDigits(int x) {
         int digits = 0;
         while(x!=0) {

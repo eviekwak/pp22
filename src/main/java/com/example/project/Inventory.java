@@ -42,8 +42,6 @@ public class Inventory {
 
     public ObservableList<Part> lookupPart(String partName) {
 
-
-//allParts.indexOf()
         ObservableList<Part> newPartsList = FXCollections.observableArrayList();
 
         for (Part searchedPart : getAllParts()){
@@ -53,17 +51,37 @@ public class Inventory {
             }
 
         }
-        System.out.println(newPartsList);
         return newPartsList;
     }
 
-    public Product lookupProduct(int partId) {
+    public Product lookupProduct(int productId) {
 
-        return null;
+        Product lookedupProductId = null;
+        for (Product searchedProduct : getAllProducts()){
+            if (searchedProduct.getId() == productId){
+
+
+                lookedupProductId = searchedProduct;
+                return lookedupProductId;
+            }
+
+        }
+
+        return lookedupProductId;
     }
 
     public ObservableList<Product> lookupProduct(String productName) {
-        return null;
+
+        ObservableList<Product> newProductsList = FXCollections.observableArrayList();
+
+        for (Product searchedProduct : getAllProducts()){
+            if (searchedProduct.getName().toLowerCase().contains(productName.toLowerCase())){
+
+                newProductsList.add(searchedProduct);
+            }
+
+        }
+        return newProductsList;
 
     }
         public void updatePart ( int index, Part selectedPart){ //updates the part with modifications

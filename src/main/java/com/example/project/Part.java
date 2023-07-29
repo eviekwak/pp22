@@ -25,7 +25,7 @@ public abstract class Part {
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
