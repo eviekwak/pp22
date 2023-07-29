@@ -2,18 +2,35 @@ package com.example.project;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class AddProductController {
+public class AddProductController implements Initializable {
     private Parent root;
     private Stage stage;
     private Scene scene;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("Initialized addanypart");
+        ToggleGroup AddPartToggle = new ToggleGroup();
+        IHInhouseRadioButton.setToggleGroup(AddPartToggle);
+        IHOutsourcedRadioButton.setToggleGroup(AddPartToggle);
+        int predeterminedID = Model.getInstance().returnProductID();
+        IHIDField.setText(String.valueOf(predeterminedID));
+    }
+
     public void SaveButton(ActionEvent actionEvent) {
+
+
     }
 
     /**
