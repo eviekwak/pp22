@@ -52,19 +52,20 @@
                      <children>
                         <TableView fx:id="AddAssociatedPartTableview" layoutY="39.0" prefHeight="111.0" prefWidth="348.0">
                           <columns>
-                            <TableColumn prefWidth="53.0" text="Part ID" />
-                            <TableColumn prefWidth="66.0" text="Part Name" />
-                              <TableColumn prefWidth="96.0" text="Inventory Level" />
-                              <TableColumn prefWidth="140.0" text="Price / Cost Per Unit" />
+                            <TableColumn fx:id="AllPartsPartIDColumn" prefWidth="53.0" text="Part ID" />
+                            <TableColumn fx:id="AllPartsNameColumn" prefWidth="66.0" text="Part Name" />
+                              <TableColumn fx:id="AllPartsInvColumn" prefWidth="96.0" text="Inventory Level" />
+                              <TableColumn fx:id="AllPartsPriceColumn" prefWidth="140.0" text="Price / Cost Per Unit" />
                           </columns>
                         </TableView>
                         <Button layoutX="295.0" layoutY="156.0" mnemonicParsing="false" onAction="#AddAssociatedPartButton" prefHeight="25.0" prefWidth="38.0" text="Add" />
-                        <TextField fx:id="AddAssociatedPartSearch" layoutX="211.0" layoutY="8.0" prefWidth="149.0" promptText="Sear" text="Search" />
+                        <TextField fx:id="AddAssociatedPartSearch" layoutX="211.0" layoutY="8.0" onKeyReleased="#AddAllPartsSearch" prefWidth="149.0" promptText="Sear" text="Search" />
                         <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Text>
+                        <Text fx:id="AllPartsSearchMessage" layoutX="97.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                   </Pane>
                   <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product">
@@ -76,14 +77,14 @@
                      <children>
                         <TableView fx:id="RemoveAssociatedPartTableview" layoutY="39.0" prefHeight="111.0" prefWidth="348.0">
                            <columns>
-                              <TableColumn prefWidth="53.0" text="Part ID" />
-                              <TableColumn prefWidth="66.0" text="Part Name" />
-                              <TableColumn prefWidth="96.0" text="Inventory Level" />
-                              <TableColumn prefWidth="140.0" text="Price / Cost Per Unit" />
+                              <TableColumn fx:id="AssociatedPartsPartIDColumn" prefWidth="53.0" text="Part ID" />
+                              <TableColumn fx:id="AssociatedPartsPartNameColumn" prefWidth="66.0" text="Part Name" />
+                              <TableColumn fx:id="AssociatedPartsInvColumn" prefWidth="96.0" text="Inventory Level" />
+                              <TableColumn fx:id="AssociatedPartsPriceColumn" prefWidth="140.0" text="Price / Cost Per Unit" />
                            </columns>
                         </TableView>
                         <Button layoutX="185.0" layoutY="163.0" mnemonicParsing="false" onAction="#RemoveAssociatedPartButton" prefHeight="25.0" prefWidth="149.0" text="Remove Associated Part" />
-                        <TextField fx:id="RemoveAssociatedPartSearch" layoutX="211.0" layoutY="8.0" prefWidth="149.0" promptText="Sear" text="Search" />
+                        <TextField fx:id="RemoveAssociatedPartSearch" layoutX="211.0" layoutY="8.0" onKeyReleased="#AddAssociatedPartsSearch" prefWidth="149.0" promptText="Sear" text="Search" />
                         <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -91,6 +92,7 @@
                         </Text>
                         <Button layoutX="185.0" layoutY="203.0" mnemonicParsing="false" onAction="#SaveButton" prefHeight="25.0" prefWidth="76.0" text="Save" />
                         <Button layoutX="272.0" layoutY="203.0" mnemonicParsing="false" onAction="#CancelButton" prefHeight="25.0" prefWidth="62.0" text="Cancel" />
+                        <Text fx:id="AssociatedPartsSearchMessage" layoutX="89.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                   </Pane>
                   <TextField fx:id="IDField" layoutX="76.0" layoutY="77.0" />
