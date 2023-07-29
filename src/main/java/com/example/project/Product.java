@@ -106,7 +106,7 @@ public class Product {
         this.max = max;
     }
 
-    public void addAssociatedPark(Part part){
+    public void addAssociatedPart(Part part){
         this.associatedParts.add(part);
     }
 

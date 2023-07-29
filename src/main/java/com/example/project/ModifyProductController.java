@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -44,13 +45,28 @@ public class ModifyProductController implements Initializable {
 
         Product modifiedProduct = Model.getInstance().getInventory().getAllProducts().get(Model.getInstance().getProductIndexToBeModified());
 
+
         IDField.setText(String.valueOf(modifiedProduct.getId()));
         NameField.setText(modifiedProduct.getName());
         InvField.setText(String.valueOf(modifiedProduct.getStock()));
         PriceField.setText(String.valueOf(modifiedProduct.getPrice()));
         MaxField.setText(String.valueOf(modifiedProduct.getMax()));
         MinField.setText(String.valueOf(modifiedProduct.getMin()));
-        }
+
+        AllPartsPartIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("id"));
+        AllPartsNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
+        AllPartsInvColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
+        AllPartsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        AddAssociatedPartTableview.setItems(Model.getInstance().getInventory().getAllParts());
+
+        AssociatedPartsPartIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("id"));
+        AssociatedPartsPartNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
+        AssociatedPartsInvColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
+        AssociatedPartsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        RemoveAssociatedPartTableview.setItems(modifiedProduct.getAllAssociatedParts());
+
+
+    }
 
 
 
@@ -87,6 +103,12 @@ public class ModifyProductController implements Initializable {
     public void ExitButton(ActionEvent event) throws IOException {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    public void AddAllPartsSearch(KeyEvent keyEvent) {
+    }
+
+    public void AddAssociatedPartsSearch(KeyEvent keyEvent) {
     }
 }
 

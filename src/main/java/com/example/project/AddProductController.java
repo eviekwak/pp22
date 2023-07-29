@@ -71,7 +71,7 @@ public class AddProductController implements Initializable {
 
             Product newProduct = new Product(Integer.parseInt(IDField.getText()), inputName, inputPrice, inputInv, inputMin,inputMax);
             //TO DO
-//            newProduct.
+//            newProduct.add
             Model.getInstance().getInventory().addProduct(newProduct);
 
 
