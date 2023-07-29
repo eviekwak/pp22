@@ -70,8 +70,7 @@ public class AddProductController implements Initializable {
             Integer inputMax = Integer.parseInt(MaxField.getText());
 
             Product newProduct = new Product(Integer.parseInt(IDField.getText()), inputName, inputPrice, inputInv, inputMin,inputMax);
-            //TO DO
-//            newProduct.add
+//             newProduct.getAllAssociatedParts().
             Model.getInstance().getInventory().addProduct(newProduct);
 
 
