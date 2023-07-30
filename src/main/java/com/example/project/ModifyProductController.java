@@ -93,6 +93,14 @@ public class ModifyProductController implements Initializable {
                 throw new Exception("Inv must be between Min and Max ");
             }
             Model.getInstance().getInventory().updateProduct(Model.getInstance().getProductIndexToBeModified(), newProduct);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            //stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
+
 
         } catch (NumberFormatException nfe) {
             AlertMethod("The input " + nfe.getMessage() + "was the wrong data type.");
@@ -100,13 +108,6 @@ public class ModifyProductController implements Initializable {
         catch (Exception wrongType) {
             AlertMethod("Something went wrong " + wrongType);
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        //stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
 
     }
 
@@ -129,12 +130,21 @@ public class ModifyProductController implements Initializable {
         }
     }
 
-    public void AddAssociatedPartButton(ActionEvent actionEvent) {
-        Part selectedPart = AddAssociatedPartTableview.getSelectionModel().getSelectedItem();
-        AssociatedPartsList.add(selectedPart);
-        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+    public void AddAssociatedPartButton(ActionEvent actionEvent) throws IOException {
+        try{
+        if (AddAssociatedPartTableview.getSelectionModel().getSelectedItem().getId() == null) {
+                throw new Exception();
+        }
 
-    }
+                Part selectedPart = AddAssociatedPartTableview.getSelectionModel().getSelectedItem();
+                AssociatedPartsList.add(selectedPart);
+                RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+        }
+        catch(Exception e){
+            AlertMethod("You must select a part first.");
+        }
+        }
+
 
     public void RemoveAssociatedPartButton(ActionEvent actionEvent) {
         Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();

@@ -197,30 +197,30 @@ public class homeController implements Initializable {
     /**
      * @param actionEvent
      */
-    public void DeleteProductsButtonHome(ActionEvent actionEvent) {
+    public void DeleteProductsButtonHome(ActionEvent actionEvent) throws IOException{
         try {
             if (ProductsTableviewHome.getSelectionModel().getSelectedItem() == null) {
                 throw null;
             }
-            String confirmationMsg = "Are you sure you would like to delete this part?";
-            Product producto = ProductsTableviewHome.getSelectionModel().getSelectedItem();
-            if (producto != null) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, confirmationMsg, ButtonType.YES, ButtonType.NO);
+            if (ProductsTableviewHome.getSelectionModel().getSelectedItem().getAllAssociatedParts().isEmpty() == false) {
+                throw new Exception();
+            }
+                Product producto = ProductsTableviewHome.getSelectionModel().getSelectedItem();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to delete this product?", ButtonType.YES, ButtonType.NO);
                 alert.showAndWait();
 
-                if (alert.getResult() == ButtonType.YES) {
+                if(alert.getResult() == ButtonType.YES) {
                     Model.getInstance().inventory.deleteProduct(producto);
                     alert.close();
                 } else if (alert.getResult() == ButtonType.NO) {
                     alert.close();
                 }
-
-            }
-
-        } catch (NullPointerException n) {
+        }
+        catch (NullPointerException n) {
             AlertMethodOk("You must select a product first.");
-        } catch (Exception Confirm) {
-            AlertMethod("Are you sure you would like to delete this part?");
+        }
+        catch (Exception e){
+            AlertMethodOk("The selected product must not have any parts associated with it to be deleted.");
         }
     }
 
