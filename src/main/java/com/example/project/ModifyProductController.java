@@ -44,7 +44,12 @@ public class ModifyProductController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Product modifiedProduct = Model.getInstance().getInventory().getAllProducts().get(Model.getInstance().getProductIndexToBeModified());
-        AssociatedPartsList = modifiedProduct.getAllAssociatedParts();
+        for(Part onePart : modifiedProduct.getAllAssociatedParts())
+        {
+            AssociatedPartsList.add(onePart);
+        }
+
+
 
         IDField.setText(String.valueOf(modifiedProduct.getId()));
         NameField.setText(modifiedProduct.getName());
