@@ -143,11 +143,14 @@ public class AddProductController implements Initializable {
             ObservableList<Part> newPartsList = FXCollections.observableArrayList();
             newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
 
+
             AllPartsSearchMessage.setText("");
             if (newPartsList.get(0) == null) {
                 AllPartsSearchMessage.setText("No results found!");
             }
             AddAssociatedPartTableview.setItems(newPartsList);
+
+
         } catch (Exception E) {
             System.out.println("It's probably a string");
             String partsText = AddAssociatedPartSearch.getText();
@@ -163,31 +166,52 @@ public class AddProductController implements Initializable {
 
     public void RemoveAssociatedPartsSearch(KeyEvent keyEvent) {
         AssociatedPartsSearchMessage.setText("");
+        int intPart = 0;
         try {
 
-            int intPart = Integer.parseInt(RemoveAssociatedPartSearch.getText());
+            intPart = Integer.parseInt(RemoveAssociatedPartSearch.getText());
 
             throw null;
         } catch (NullPointerException e) {
-            int intPart = Integer.parseInt(RemoveAssociatedPartSearch.getText());
-            ObservableList<Part> newPartsList = FXCollections.observableArrayList();
-            newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+          
+            ObservableList<Part> matchingAllPartsList = FXCollections.observableArrayList();
+            ObservableList<Part> onlyInRemovePartsList = FXCollections.observableArrayList();
+
+            matchingAllPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+
+
+            if (AssociatedPartsList.contains(matchingAllPartsList.get(0))){
+                System.out.println("match");
+                onlyInRemovePartsList.add(matchingAllPartsList.get(0));
+            };
 
             AssociatedPartsSearchMessage.setText("");
-            if (newPartsList.get(0) == null) {
+            if (onlyInRemovePartsList == null) {
                 AssociatedPartsSearchMessage.setText("No results found!");
             }
-            RemoveAssociatedPartTableview.setItems(newPartsList);
+            RemoveAssociatedPartTableview.setItems(onlyInRemovePartsList);
         } catch (Exception E) {
             System.out.println("It's probably a string");
-            String partsText = AssociatedPartsSearchMessage.getText();
-            ObservableList<Part> newPartsList = Model.getInstance().inventory.lookupPart(partsText);
-            if (newPartsList.isEmpty()) {
+
+            String partsText = RemoveAssociatedPartSearch.getText();
+            System.out.println(partsText);
+            ObservableList<Part> matchingAllPartsList = Model.getInstance().inventory.lookupPart(partsText);
+            ObservableList<Part> onlyInRemovePartsList = FXCollections.observableArrayList();
+
+
+            if (matchingAllPartsList.isEmpty()) {
                 AssociatedPartsSearchMessage.setText("No results found!");
             } else {
                 AssociatedPartsSearchMessage.setText("");
             }
-            RemoveAssociatedPartTableview.setItems(newPartsList);
+
+            for(Part allPartsMatch : matchingAllPartsList){
+                if(AssociatedPartsList.contains(allPartsMatch)){
+                    onlyInRemovePartsList.add(allPartsMatch);
+                }
+            }
+            System.out.println("before end");
+            RemoveAssociatedPartTableview.setItems(onlyInRemovePartsList);
         }
     }
 
