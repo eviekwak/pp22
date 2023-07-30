@@ -44,7 +44,7 @@ public class ModifyProductController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Product modifiedProduct = Model.getInstance().getInventory().getAllProducts().get(Model.getInstance().getProductIndexToBeModified());
-
+        AssociatedPartsList = modifiedProduct.getAllAssociatedParts();
 
         IDField.setText(String.valueOf(modifiedProduct.getId()));
         NameField.setText(modifiedProduct.getName());
@@ -63,14 +63,50 @@ public class ModifyProductController implements Initializable {
         AssociatedPartsPartNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
         AssociatedPartsInvColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
         AssociatedPartsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        RemoveAssociatedPartTableview.setItems(modifiedProduct.getAllAssociatedParts());
+        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
 
 
     }
 
 
 
-    public void SaveButton(ActionEvent event) {
+    public void SaveButton(ActionEvent event) throws IOException {
+        try {
+
+            //this block grabs the text from the input fields
+            String inputName = NameField.getText();
+            Double inputPrice = Double.parseDouble(PriceField.getText());
+            Integer inputInv = Integer.parseInt(InvField.getText());
+            Integer inputMin = Integer.parseInt(MinField.getText());
+            Integer inputMax = Integer.parseInt(MaxField.getText());
+
+            Product newProduct = new Product(Integer.parseInt(IDField.getText()), inputName, inputPrice, inputInv, inputMin,inputMax);
+            for(Part associatedPart : AssociatedPartsList) {
+                newProduct.addAssociatedPart(associatedPart);
+            }
+
+            //throws exceptions based on required limits
+            if (inputMin > inputMax) {
+                throw new Exception("Min should be less than Max ");
+            }
+            if (inputInv < inputMin || inputInv > inputMax) {
+                throw new Exception("Inv must be between Min and Max ");
+            }
+            Model.getInstance().getInventory().updateProduct(Model.getInstance().getProductIndexToBeModified(), newProduct);
+
+        } catch (NumberFormatException nfe) {
+            AlertMethod("The input " + nfe.getMessage() + "was the wrong data type.");
+        }
+        catch (Exception wrongType) {
+            AlertMethod("Something went wrong " + wrongType);
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        //stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -94,11 +130,16 @@ public class ModifyProductController implements Initializable {
     }
 
     public void AddAssociatedPartButton(ActionEvent actionEvent) {
+        Part selectedPart = AddAssociatedPartTableview.getSelectionModel().getSelectedItem();
+        AssociatedPartsList.add(selectedPart);
+        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
 
     }
 
     public void RemoveAssociatedPartButton(ActionEvent actionEvent) {
-
+        Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();
+        AssociatedPartsList.remove(selectedPart);
+        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
     }
     public void ExitButton(ActionEvent event) throws IOException {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

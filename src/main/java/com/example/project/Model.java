@@ -28,45 +28,84 @@ public class Model {
     int partIndexToBeModified;
     int productIndexToBeModified;
 
+    /**
+     *
+     * @return
+     */
     public int getPartIndexToBeModified (){
         return this.partIndexToBeModified;
     }
+
+    /**
+     *
+     * @param setPartIndex
+     */
     public void setPartIndexToBeModified(int setPartIndex) {
         this.partIndexToBeModified = setPartIndex;
     }
+
+    /**
+     *Gets the index of a product to be modified.
+     * @return an int/index.
+     */
     public int getProductIndexToBeModified (){
         return this.productIndexToBeModified;
     }
+
+    /**
+     *Sets the index of a product to be modified.
+     * @param setProductIndex The new product index.
+     */
     public void setProductIndexToBeModified(int setProductIndex) {
         this.productIndexToBeModified = setProductIndex;
     }
 
+    /**
+     *
+     * @return
+     */
     public int returnPartID(){
         incrementingPartID--;
         return incrementingPartID;
     } //returns Part ID
 
+    /**
+     * Returns Product ID
+     * @return
+     */
     public int returnProductID(){
         incrementingProductID--;
         return incrementingProductID;
-    } //returns Product ID
+    }
     private Model(){
 
     }
+
+    /**
+     *Gets the instance of the singleton object Model.
+     * @return new Model.
+     */
     public static Model getInstance(){
         if(globalControls == null) {
             globalControls = new Model();
         }
-
-        // returns the singleton object
         return globalControls;
     }
+
+    /**
+     * returns Inventory.
+     * @return inventory
+     */
     public Inventory getInventory() {
         return inventory;
-    } //returns Inventory
+    }
+
+    /**
+     * sets Inventory with @param newInv
+     */
     public void setInventory(Inventory newInv){
         inventory = newInv;
-    } //sets Inventory
+    }
 
 
 }
