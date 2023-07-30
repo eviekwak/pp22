@@ -134,6 +134,14 @@ public class ModifyProductController implements Initializable {
             alert.close();
         }
     }
+    public void AlertMethodYes(String x) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            alert.close();
+        }
+    }
 
     public void AddAssociatedPartButton(ActionEvent actionEvent) throws IOException {
         try{
@@ -152,9 +160,24 @@ public class ModifyProductController implements Initializable {
 
 
     public void RemoveAssociatedPartButton(ActionEvent actionEvent) {
-        Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();
-        AssociatedPartsList.remove(selectedPart);
-        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+        try {
+            if (RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem().getId() == null) {
+                throw new Exception();
+            }
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to remove this associated part?", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();
+                AssociatedPartsList.remove(selectedPart);
+                RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+                alert.close();
+            } else if (alert.getResult() == ButtonType.NO) {
+                alert.close();
+            }
+        }
+        catch (Exception e){
+            AlertMethod("You must select an associated part first.");
+        }
     }
     public void ExitButton(ActionEvent event) throws IOException {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -164,7 +187,8 @@ public class ModifyProductController implements Initializable {
     public void AddAllPartsSearch(KeyEvent keyEvent) {
     }
 
-    public void AddAssociatedPartsSearch(KeyEvent keyEvent) {
+
+    public void RemoveAssociatedPartsSearch(KeyEvent keyEvent) {
     }
 }
 

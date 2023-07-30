@@ -77,11 +77,25 @@ private Scene scene;
 
             InHouse newPart = new InHouse(Integer.parseInt(IHIDField.getText()), inputName, inputPrice, inputInv, inputMin,inputMax, Integer.parseInt(inputMachineID));
             Model.getInstance().getInventory().addPart(newPart);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+                root = loader.load();
+                stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                //stage.setTitle("Hello!");
+                stage.setScene(scene);
+                stage.show();
         }
             //adds outsourced part
         else if (IHOutsourcedRadioButton.isSelected()){
             Outsourced newPart = new Outsourced(Integer.parseInt(IHIDField.getText()), inputName, inputPrice, inputInv, inputMin,inputMax, inputMachineID);
             Model.getInstance().getInventory().addPart(newPart);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+                root = loader.load();
+                stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                //stage.setTitle("Hello!");
+                stage.setScene(scene);
+                stage.show();
         }
 
     }
@@ -101,7 +115,7 @@ private Scene scene;
      * @param event is when the button is clicked.
      * Returns to home page.
      */
-    public void CancelButton(ActionEvent event) throws IOException { //returns to home page
+    public void CancelButton(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
         root = loader.load();

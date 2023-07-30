@@ -69,8 +69,8 @@ public class AddProductController implements Initializable {
             Integer inputMin = Integer.parseInt(MinField.getText());
             Integer inputMax = Integer.parseInt(MaxField.getText());
 
-            Product newProduct = new Product(Integer.parseInt(IDField.getText()), inputName, inputPrice, inputInv, inputMin,inputMax);
-            for(Part associatedPart : AssociatedPartsList) {
+            Product newProduct = new Product(Integer.parseInt(IDField.getText()), inputName, inputPrice, inputInv, inputMin, inputMax);
+            for (Part associatedPart : AssociatedPartsList) {
                 newProduct.addAssociatedPart(associatedPart);
             }
             Model.getInstance().getInventory().addProduct(newProduct);
@@ -86,8 +86,7 @@ public class AddProductController implements Initializable {
 
         } catch (NumberFormatException nfe) {
             AlertMethod("The input " + nfe.getMessage() + "was the wrong data type.");
-        }
-        catch (Exception wrongType) {
+        } catch (Exception wrongType) {
             AlertMethod("Something went wrong " + wrongType);
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
@@ -99,95 +98,99 @@ public class AddProductController implements Initializable {
         stage.show();
     }
 
-        /**
-         * @param event is when the button is clicked.
-         *              Returns to home page.
-         */
-        public void CancelButton (ActionEvent event) throws IOException { //returns to home page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-            root = loader.load();
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            //stage.setTitle("Hello!");
-            stage.setScene(scene);
-            stage.show();
+    /**
+     * @param event is when the button is clicked.
+     *              Returns to home page.
+     */
+    public void CancelButton(ActionEvent event) throws IOException { //returns to home page
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        //stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
 
+    }
+
+    public void AddAssociatedPartButton(ActionEvent actionEvent) {
+
+        Part selectedPart = AddAssociatedPartTableview.getSelectionModel().getSelectedItem();
+        AssociatedPartsList.add(selectedPart);
+        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+    }
+
+    public void RemoveAssociatedPartButton(ActionEvent actionEvent) {
+        Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();
+        AssociatedPartsList.remove(selectedPart);
+        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+    }
+
+    public void ExitButton(ActionEvent event) throws IOException {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    public void AddAllPartsSearch(KeyEvent keyEvent) {
+        AllPartsSearchMessage.setText("");
+        try {
+
+            int intPart = Integer.parseInt(AddAssociatedPartSearch.getText());
+
+            throw null;
+        } catch (NullPointerException e) {
+            int intPart = Integer.parseInt(AddAssociatedPartSearch.getText());
+            ObservableList<Part> newPartsList = FXCollections.observableArrayList();
+            newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+
+            AllPartsSearchMessage.setText("");
+            if (newPartsList.get(0) == null) {
+                AllPartsSearchMessage.setText("No results found!");
+            }
+            AddAssociatedPartTableview.setItems(newPartsList);
+        } catch (Exception E) {
+            System.out.println("It's probably a string");
+            String partsText = AddAssociatedPartSearch.getText();
+            ObservableList<Part> newPartsList = Model.getInstance().inventory.lookupPart(partsText);
+            if (newPartsList.isEmpty()) {
+                AllPartsSearchMessage.setText("No results found!");
+            } else {
+                AllPartsSearchMessage.setText("");
+            }
+            AddAssociatedPartTableview.setItems(newPartsList);
         }
+    }
 
-        public void AddAssociatedPartButton (ActionEvent actionEvent){
+    public void RemoveAssociatedPartsSearch(KeyEvent keyEvent) {
+        AssociatedPartsSearchMessage.setText("");
+        try {
 
-            Part selectedPart = AddAssociatedPartTableview.getSelectionModel().getSelectedItem();
-            AssociatedPartsList.add(selectedPart);
-            RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+            int intPart = Integer.parseInt(RemoveAssociatedPartSearch.getText());
+
+            throw null;
+        } catch (NullPointerException e) {
+            int intPart = Integer.parseInt(RemoveAssociatedPartSearch.getText());
+            ObservableList<Part> newPartsList = FXCollections.observableArrayList();
+            newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+
+            AssociatedPartsSearchMessage.setText("");
+            if (newPartsList.get(0) == null) {
+                AssociatedPartsSearchMessage.setText("No results found!");
+            }
+            RemoveAssociatedPartTableview.setItems(newPartsList);
+        } catch (Exception E) {
+            System.out.println("It's probably a string");
+            String partsText = AssociatedPartsSearchMessage.getText();
+            ObservableList<Part> newPartsList = Model.getInstance().inventory.lookupPart(partsText);
+            if (newPartsList.isEmpty()) {
+                AssociatedPartsSearchMessage.setText("No results found!");
+            } else {
+                AssociatedPartsSearchMessage.setText("");
+            }
+            RemoveAssociatedPartTableview.setItems(newPartsList);
         }
+    }
 
-        public void RemoveAssociatedPartButton (ActionEvent actionEvent){
-            Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();
-            AssociatedPartsList.remove(selectedPart);
-            RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
-        }
-
-        public void ExitButton (ActionEvent event) throws IOException {
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-        }
-
-        public void AddAllPartsSearch (KeyEvent keyEvent){
-        }
-
-        public void AddAssociatedPartsSearch (KeyEvent keyEvent){
-//        PartsTableSearchMessage.setText("");
-//        try {
-//
-//            int intPart = Integer.parseInt(PartsTableviewSearchHome.getText());
-//
-//            throw null;
-////
-////            if(howManyDigits(intPart)<4) {
-//
-////                ObservableList<Part> newPartsList = FXCollections.observableArrayList();
-////                newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
-////
-////                PartsTableSearchMessage.setText("");
-////                if (newPartsList.get(0).getId() == null){
-////                    PartsTableSearchMessage.setText("No results found!");
-////                }
-////                PartsTableviewHome.setItems(newPartsList);
-////            }
-////            else{
-////                PartsTableSearchMessage.setText("ID is too long, did not find");
-////            }
-//
-//
-////            System.out.println(PartsTableviewHome.getItems().toArray().length);
-////            if(PartsTableviewHome.getItems().){
-////                System.out.println("NEWPARTLIST IS NULL!");
-////            }
-////            else{System.out.println("NEWPARTLIST ISnt NULL!"); }
-//
-//        } catch (NullPointerException e) {
-//            int intPart = Integer.parseInt(PartsTableviewSearchHome.getText());
-//            ObservableList<Part> newPartsList = FXCollections.observableArrayList();
-//            newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
-//
-//            PartsTableSearchMessage.setText("");
-//            if (newPartsList.get(0) == null) {
-//                PartsTableSearchMessage.setText("No results found!");
-//            }
-//            PartsTableviewHome.setItems(newPartsList);
-//        } catch (Exception E) {
-//            System.out.println("It's probably a string");
-//            String partsText = PartsTableviewSearchHome.getText();
-//            ObservableList<Part> newPartsList = Model.getInstance().inventory.lookupPart(partsText);
-//            if (newPartsList.isEmpty()) {
-//                PartsTableSearchMessage.setText("No results found!");
-//            } else {
-//                PartsTableSearchMessage.setText("");
-//            }
-//            PartsTableviewHome.setItems(newPartsList);
-//        }
-//    }
-        }
 
     public void AlertMethod(String x) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.OK);
@@ -197,4 +200,6 @@ public class AddProductController implements Initializable {
             alert.close();
         }
     }
+
+
 }

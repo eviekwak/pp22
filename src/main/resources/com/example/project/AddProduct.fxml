@@ -32,10 +32,6 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -46,7 +42,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="451.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.AddProductController">
+<VBox prefHeight="451.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.AddProductController">
   <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0">
          <children>
@@ -88,7 +84,7 @@
                            </columns>
                         </TableView>
                         <Button layoutX="185.0" layoutY="163.0" mnemonicParsing="false" onAction="#RemoveAssociatedPartButton" prefHeight="25.0" prefWidth="149.0" text="Remove Associated Part" />
-                        <TextField fx:id="RemoveAssociatedPartSearch" layoutX="211.0" layoutY="8.0" onKeyReleased="#AddAssociatedPartsSearch" prefWidth="149.0" promptText="Search" />
+                        <TextField fx:id="RemoveAssociatedPartSearch" layoutX="211.0" layoutY="8.0" onKeyReleased="#RemoveAssociatedPartsSearch" prefWidth="149.0" promptText="Search" />
                         <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
                            <font>
                               <Font name="System Bold" size="15.0" />

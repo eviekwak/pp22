@@ -84,7 +84,7 @@
                            </columns>
                         </TableView>
                         <Button layoutX="185.0" layoutY="163.0" mnemonicParsing="false" onAction="#RemoveAssociatedPartButton" prefHeight="25.0" prefWidth="149.0" text="Remove Associated Part" />
-                        <TextField fx:id="RemoveAssociatedPartSearch" layoutX="211.0" layoutY="8.0" onKeyReleased="#AddAssociatedPartsSearch" prefWidth="149.0" promptText="Search" />
+                        <TextField fx:id="RemoveAssociatedPartSearch" layoutX="211.0" layoutY="8.0" onKeyReleased="#RemoveAssociatedPartsSearch" prefWidth="149.0" promptText="Search" />
                         <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
                            <font>
                               <Font name="System Bold" size="15.0" />
