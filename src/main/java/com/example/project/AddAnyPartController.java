@@ -128,8 +128,8 @@ private Scene scene;
     }
 
     /**
-     * Changes the text label based on
-     * which radio button is currently selected.
+     * Sets the text depending on which radio button is selected.
+     * @param ev
      */
     public void ListenRadio(ActionEvent ev){
         if (IHInhouseRadioButton.isSelected()) {
@@ -153,6 +153,12 @@ private Scene scene;
             alert.close();
         }
     }
+
+    /**
+     *Exits the program
+     * @param event
+     * @throws IOException
+     */
     public void ExitButton(ActionEvent event) throws IOException {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();

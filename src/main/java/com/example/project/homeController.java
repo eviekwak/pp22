@@ -49,9 +49,18 @@ public class homeController implements Initializable {
     @FXML
     private TableColumn<Product, Integer> ProductIDColumnHome, ProductInventLvlColumnHome;
 
+    /**
+     * A FUTURE ENHANCEMENT TO EXTEND THE PROGRAM'S FUNCTIONALITY
+     *  The enhancement would be considering the search function for all tables.
+     *  Currently, when an integer is searched for, you must type the exact ID of a part/product to get results AND
+     *  the GUI message next to the search bar says "No results found!" until the exact ID is searched for.
+     *
+     *  The enhancement could be that the GUI message displays a message like "a part ID contains search input" so that the
+     *  * user understands that there are potential results or no potential results.
+     *  * This can save the user time searching numbers, and give more overall awareness of the lists' contents to the user.
+     *  */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Initialized home");
         PartIDColumnHome.setCellValueFactory(new PropertyValueFactory<Part, Integer>("id"));
         PartNameColumnHome.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
         PartInventLvlColumnHome.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
@@ -66,7 +75,7 @@ public class homeController implements Initializable {
 
     }
 
-    /**
+    /**Opens the add part form
      * @param event
      * @throws IOException
      */
@@ -93,7 +102,7 @@ public class homeController implements Initializable {
 
     }
 
-    /**
+    /**Opens the modify parts form for a specific part when said part is selected from the tableview
      * @param actionEvent
      * @throws IOException
      */
@@ -119,7 +128,7 @@ public class homeController implements Initializable {
         }
     }
 
-    /**
+    /**Deletes the selected part after yes is selected from the alert.  Cancels if no is selected.
      * @param actionEvent
      */
     public void DeletePartsButtonHome(ActionEvent actionEvent) {
@@ -150,7 +159,7 @@ public class homeController implements Initializable {
 
     }
 
-    /**
+    /**Opens the add products form
      * @param actionEvent
      * @throws IOException
      */
@@ -167,7 +176,7 @@ public class homeController implements Initializable {
         stage.show();
     }
 
-    /**
+    /**Opens the modify products form for a specific product when said product is selected from the tableview
      * @param actionEvent
      * @throws IOException
      */
@@ -194,7 +203,7 @@ public class homeController implements Initializable {
         }
     }
 
-    /**
+    /**Deletes the selected product after yes is selected from the alert.  Sends error message if there are parts associated with the selected product.  Cancels if no is selected.
      * @param actionEvent
      */
     public void DeleteProductsButtonHome(ActionEvent actionEvent) throws IOException{
@@ -224,8 +233,8 @@ public class homeController implements Initializable {
         }
     }
 
-    /**
-     * @param x
+    /**Pops up an alert with a message, a yes and a no button
+     * @param x a message for the alert
      */
     public void AlertMethod(String x) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.YES, ButtonType.NO);
@@ -238,8 +247,8 @@ public class homeController implements Initializable {
         }
     }
 
-    /**
-     * @param x
+    /**Pops up an alert with a message and an ok button
+     * @param x a message for the alert
      */
     public void AlertMethodOk(String x) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.OK);
@@ -249,7 +258,7 @@ public class homeController implements Initializable {
         }
     }
 
-    /**
+    /**Exits application
      * @param event
      * @throws IOException
      */
@@ -258,7 +267,7 @@ public class homeController implements Initializable {
         stage.close();
     }
 
-    /**
+    /**Grabs text from the search bar and displays matching results(all parts).  Sets GUI text accordingly.
      * @param keyEvent
      * @throws IOException
      */
@@ -293,7 +302,7 @@ public class homeController implements Initializable {
         }
     }
 
-    /**
+    /**Grabs text from the search bar and displays matching results(products).  Sets GUI text accordingly.
      * @param keyEvent
      * @throws IOException
      */

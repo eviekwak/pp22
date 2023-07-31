@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+
+
 public class AddProductController implements Initializable {
     private Parent root;
     private Stage stage;
@@ -36,6 +39,8 @@ public class AddProductController implements Initializable {
     @FXML
     public TextField IDField, NameField, InvField, PriceField, MinField, MaxField;
     ObservableList<Part> AssociatedPartsList = FXCollections.observableArrayList();
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,6 +63,11 @@ public class AddProductController implements Initializable {
 
     }
 
+    /**
+     *Grabs the text from the input fields, including the associated parts and saves the product. Redirects user to home page once complete.  Throws error alerts if min is more than max and vice verse, or if the data types entered are wrong.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void SaveButton(ActionEvent actionEvent) throws IOException {
         try {
 
@@ -99,8 +109,8 @@ public class AddProductController implements Initializable {
     }
 
     /**
-     * @param event is when the button is clicked.
-     *              Returns to home page.
+     * @param event
+     *Returns to home page.
      */
     public void CancelButton(ActionEvent event) throws IOException { //returns to home page
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
@@ -113,24 +123,64 @@ public class AddProductController implements Initializable {
 
     }
 
+    /**
+     *Adds the associated part selected from the top table to the bottom table and the temporary list for the product being created.
+     * @param actionEvent
+     */
     public void AddAssociatedPartButton(ActionEvent actionEvent) {
+        try{
+            if (AddAssociatedPartTableview.getSelectionModel().getSelectedItem().getId() == null) {
+                throw new Exception();
+            }
 
-        Part selectedPart = AddAssociatedPartTableview.getSelectionModel().getSelectedItem();
-        AssociatedPartsList.add(selectedPart);
-        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+            Part selectedPart = AddAssociatedPartTableview.getSelectionModel().getSelectedItem();
+            AssociatedPartsList.add(selectedPart);
+            RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+        }
+        catch(Exception e){
+            AlertMethod("You must select a part first.");
+        }
     }
 
+    /**
+     *Removes the selected associated part after yes is selected from the alert. Cancels if no is selected. Sends error if no associated part is selected.
+     * @param actionEvent
+     */
     public void RemoveAssociatedPartButton(ActionEvent actionEvent) {
-        Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();
-        AssociatedPartsList.remove(selectedPart);
-        RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+        try {
+            if (RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem().getId() == null) {
+                throw new Exception();
+            }
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to remove this associated part?", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                Part selectedPart = RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem();
+                AssociatedPartsList.remove(selectedPart);
+                RemoveAssociatedPartTableview.setItems(AssociatedPartsList);
+                alert.close();
+            } else if (alert.getResult() == ButtonType.NO) {
+                alert.close();
+            }
+        }
+        catch (Exception e){
+            AlertMethod("You must select an associated part first.");
+        }
     }
 
+    /**
+     *Closes the program.
+     * @param event
+     * @throws IOException
+     */
     public void ExitButton(ActionEvent event) throws IOException {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
+    /**
+     *Grabs text from the search bar and displays matching results(all parts).  Sets GUI text accordingly.
+     * @param keyEvent
+     */
     public void AddAllPartsSearch(KeyEvent keyEvent) {
         AllPartsSearchMessage.setText("");
         try {
@@ -164,6 +214,22 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**Grabs text from the search bar and displays matching results(associated parts).  Sets GUI text accordingly.
+     * @param keyEvent
+     *
+     *     RUNTIME ERROR
+     *  * The problem was considering the bottom tableview search bar on the Add Products page
+     *  * Although the list was populated with the proper items at first, searching would change the list to the all parts list.
+     *  *
+     *  * I fixed this logical error by creating another observableList, two total (matchingAllPartsList and onlyInRemovePartsList).
+     *  * When the user searches an integer, the matched part is added to the first list.
+     *  * Then is added to the second list if there is a part in the first index of the first list.
+     *  * Then the tableview is set with the second list.
+     *  * When the user searches a string, there is a for loop which cycles through all parts in the first list.
+     *  * Then it checks whether each part is contained in AssociatedPartsList, and if true, adds that part to the second list.
+     *  * Then the tableview is set with the second list.
+     *  */
+
     public void RemoveAssociatedPartsSearch(KeyEvent keyEvent) {
         AssociatedPartsSearchMessage.setText("");
         int intPart = 0;
@@ -183,11 +249,12 @@ public class AddProductController implements Initializable {
             if (AssociatedPartsList.contains(matchingAllPartsList.get(0))){
                 System.out.println("match");
                 onlyInRemovePartsList.add(matchingAllPartsList.get(0));
-            };
+            }
 
-            AssociatedPartsSearchMessage.setText("");
-            if (onlyInRemovePartsList == null) {
+            if (onlyInRemovePartsList.isEmpty()) {
                 AssociatedPartsSearchMessage.setText("No results found!");
+            } else {
+                AssociatedPartsSearchMessage.setText("");
             }
             RemoveAssociatedPartTableview.setItems(onlyInRemovePartsList);
         } catch (Exception E) {
@@ -198,24 +265,25 @@ public class AddProductController implements Initializable {
             ObservableList<Part> matchingAllPartsList = Model.getInstance().inventory.lookupPart(partsText);
             ObservableList<Part> onlyInRemovePartsList = FXCollections.observableArrayList();
 
-
-            if (matchingAllPartsList.isEmpty()) {
-                AssociatedPartsSearchMessage.setText("No results found!");
-            } else {
-                AssociatedPartsSearchMessage.setText("");
-            }
-
             for(Part allPartsMatch : matchingAllPartsList){
                 if(AssociatedPartsList.contains(allPartsMatch)){
                     onlyInRemovePartsList.add(allPartsMatch);
                 }
+            }
+            if (onlyInRemovePartsList.isEmpty()) {
+                AssociatedPartsSearchMessage.setText("No results found!");
+            } else {
+                AssociatedPartsSearchMessage.setText("");
             }
             System.out.println("before end");
             RemoveAssociatedPartTableview.setItems(onlyInRemovePartsList);
         }
     }
 
-
+    /**Pops up an alert with a message and an OK button
+     *
+     * @param x
+     */
     public void AlertMethod(String x) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.OK);
         alert.showAndWait();

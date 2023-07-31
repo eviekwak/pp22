@@ -16,6 +16,15 @@ public class Product {
     private int min;
     private int max;
 
+    /**
+     *The constructor for the Product Object.
+     * @param id
+     * @param name
+     * @param price
+     * @param stock
+     * @param min
+     * @param max
+     */
     public Product(int id, String name, double price, int stock, int min, int max) {
         this.id = id;
         this.name = name;
@@ -25,14 +34,17 @@ public class Product {
         this.max = max;
     }
 
-    /**
+    /**Gets ID
      * @return the id
      */
     public int getId() {
         return id;
     }
 
-
+    /**
+     * Sets ID.
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
@@ -44,8 +56,8 @@ public class Product {
         return name;
     }
 
-    /**
-     * @param name the name to set
+    /**Set the name
+     * @param name
      */
     public void setName(String name) {
         this.name = name;
@@ -58,8 +70,8 @@ public class Product {
         return price;
     }
 
-    /**
-     * @param price the price to set
+    /**Set the Price
+     * @param price
      */
     public void setPrice(double price) {
         this.price = price;
@@ -72,7 +84,7 @@ public class Product {
         return stock;
     }
 
-    /**
+    /**Set the Stock
      * @param stock the stock to set
      */
     public void setStock(int stock) {
@@ -86,8 +98,8 @@ public class Product {
         return min;
     }
 
-    /**
-     * @param min the min to set
+    /**Set the min
+     * @param min
      */
     public void setMin(int min) {
         this.min = min;
@@ -107,15 +119,28 @@ public class Product {
         this.max = max;
     }
 
+    /**
+     *Adds the part to the associated parts list
+     * @param part
+     */
     public void addAssociatedPart(Part part){
         this.associatedParts.add(part);
     }
 
+    /**
+     *Removes param from associated parts list
+     * @param selectedAssociatedPart
+     * @return
+     */
     public boolean deleteAssociatedPart(Part selectedAssociatedPart){
         this.associatedParts.remove(selectedAssociatedPart);
         return true;
     }
 
+    /**
+     *
+     * @return all associated parts
+     */
     public ObservableList<Part> getAllAssociatedParts(){
         return this.associatedParts;
     }

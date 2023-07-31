@@ -30,14 +30,13 @@ public class Model {
 
     /**
      *
-     * @return
+     * @return the index of the part to be modified
      */
     public int getPartIndexToBeModified (){
         return this.partIndexToBeModified;
     }
 
-    /**
-     *
+    /**Sets the index of the part to be modified.
      * @param setPartIndex
      */
     public void setPartIndexToBeModified(int setPartIndex) {
@@ -61,15 +60,15 @@ public class Model {
     }
 
     /**
-     *
-     * @return
+     *Decrements the part ID
+     * @return part ID
      */
     public int returnPartID(){
         incrementingPartID--;
         return incrementingPartID;
     } //returns Part ID
 
-    /**
+    /**Decrements the product ID
      * Returns Product ID
      * @return
      */

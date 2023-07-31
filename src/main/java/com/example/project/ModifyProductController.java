@@ -74,7 +74,11 @@ public class ModifyProductController implements Initializable {
     }
 
 
-
+    /**
+     *Grabs the text from the input fields, including the associated parts and saves the product. Redirects user to home page once complete.  Throws error alerts if min is more than max and vice verse, or if the data types entered are wrong.
+     * @param event
+     * @throws IOException
+     */
     public void SaveButton(ActionEvent event) throws IOException {
         try {
 
@@ -116,6 +120,11 @@ public class ModifyProductController implements Initializable {
 
     }
 
+    /**
+     *Returns to home page.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void CancelButton(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
@@ -126,6 +135,9 @@ public class ModifyProductController implements Initializable {
         stage.show();
     }
 
+    /**Pops up an alert with a message and an OK button
+     * @param x
+     */
     public void AlertMethod(String x) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.OK);
         alert.showAndWait();
@@ -134,6 +146,11 @@ public class ModifyProductController implements Initializable {
             alert.close();
         }
     }
+
+    /**Pops up an alert with a message, a YES button and a NO button
+     *
+     * @param x
+     */
     public void AlertMethodYes(String x) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
@@ -143,6 +160,11 @@ public class ModifyProductController implements Initializable {
         }
     }
 
+    /**
+     * Adds the associated part selected from the top table to the bottom table and the temporary list for the product being created.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void AddAssociatedPartButton(ActionEvent actionEvent) throws IOException {
         try{
         if (AddAssociatedPartTableview.getSelectionModel().getSelectedItem().getId() == null) {
@@ -158,7 +180,10 @@ public class ModifyProductController implements Initializable {
         }
         }
 
-
+    /**
+     *Removes the selected associated part after yes is selected from the alert. Cancels if no is selected. Sends error if no associated part is selected.
+     * @param actionEvent
+     */
     public void RemoveAssociatedPartButton(ActionEvent actionEvent) {
         try {
             if (RemoveAssociatedPartTableview.getSelectionModel().getSelectedItem().getId() == null) {
@@ -179,16 +204,107 @@ public class ModifyProductController implements Initializable {
             AlertMethod("You must select an associated part first.");
         }
     }
+
+    /**
+     * Closes the program.
+     * @param event
+     * @throws IOException
+     */
     public void ExitButton(ActionEvent event) throws IOException {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
 
+    /**
+     *Grabs text from the search bar and displays matching results(all parts).  Sets GUI text accordingly.
+     * @param keyEvent
+     */
     public void AddAllPartsSearch(KeyEvent keyEvent) {
+        AllPartsSearchMessage.setText("");
+        try {
+
+            int intPart = Integer.parseInt(AddAssociatedPartSearch.getText());
+
+            throw null;
+        } catch (NullPointerException e) {
+            int intPart = Integer.parseInt(AddAssociatedPartSearch.getText());
+            ObservableList<Part> newPartsList = FXCollections.observableArrayList();
+            newPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+
+
+            AllPartsSearchMessage.setText("");
+            if (newPartsList.get(0) == null) {
+                AllPartsSearchMessage.setText("No results found!");
+            }
+            AddAssociatedPartTableview.setItems(newPartsList);
+
+
+        } catch (Exception E) {
+            System.out.println("It's probably a string");
+            String partsText = AddAssociatedPartSearch.getText();
+            ObservableList<Part> newPartsList = Model.getInstance().inventory.lookupPart(partsText);
+            if (newPartsList.isEmpty()) {
+                AllPartsSearchMessage.setText("No results found!");
+            } else {
+                AllPartsSearchMessage.setText("");
+            }
+            AddAssociatedPartTableview.setItems(newPartsList);
+        }
     }
 
-
+    /**Grabs text from the search bar and displays matching results(associated parts).  Sets GUI text accordingly.
+     *
+     * @param keyEvent
+     */
     public void RemoveAssociatedPartsSearch(KeyEvent keyEvent) {
+        AssociatedPartsSearchMessage.setText("");
+        int intPart = 0;
+        try {
+
+            intPart = Integer.parseInt(RemoveAssociatedPartSearch.getText());
+
+            throw null;
+        } catch (NullPointerException e) {
+
+            ObservableList<Part> matchingAllPartsList = FXCollections.observableArrayList();
+            ObservableList<Part> onlyInRemovePartsList = FXCollections.observableArrayList();
+
+            matchingAllPartsList.add(Model.getInstance().inventory.lookupPart(intPart));
+
+
+            if (AssociatedPartsList.contains(matchingAllPartsList.get(0))){
+                System.out.println("match");
+                onlyInRemovePartsList.add(matchingAllPartsList.get(0));
+            }
+
+            if (onlyInRemovePartsList.isEmpty()) {
+                AssociatedPartsSearchMessage.setText("No results found!");
+            } else {
+                AssociatedPartsSearchMessage.setText("");
+            }
+            RemoveAssociatedPartTableview.setItems(onlyInRemovePartsList);
+        } catch (Exception E) {
+            System.out.println("It's probably a string");
+
+            String partsText = RemoveAssociatedPartSearch.getText();
+            System.out.println(partsText);
+            ObservableList<Part> matchingAllPartsList = Model.getInstance().inventory.lookupPart(partsText);
+            ObservableList<Part> onlyInRemovePartsList = FXCollections.observableArrayList();
+
+            for(Part allPartsMatch : matchingAllPartsList){
+                if(AssociatedPartsList.contains(allPartsMatch)){
+                    onlyInRemovePartsList.add(allPartsMatch);
+                }
+            }
+            if (onlyInRemovePartsList.isEmpty()) {
+                AssociatedPartsSearchMessage.setText("No results found!");
+            } else {
+                AssociatedPartsSearchMessage.setText("");
+            }
+            System.out.println("before end");
+            RemoveAssociatedPartTableview.setItems(onlyInRemovePartsList);
+        }
     }
+
 }
 

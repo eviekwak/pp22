@@ -34,6 +34,9 @@ public class ModifyPartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println(Model.getInstance().getPartIndexToBeModified());
+        ToggleGroup AddPartToggle = new ToggleGroup();
+        InhouseRadioButton.setToggleGroup(AddPartToggle);
+        OutsourcedRadioButton.setToggleGroup(AddPartToggle);
         Part modifiedPart = Model.getInstance().getInventory().getAllParts().get(Model.getInstance().getPartIndexToBeModified());
         if (modifiedPart.getClass() == InHouse.class) {
             InhouseRadioButton.setSelected(true);
@@ -63,6 +66,13 @@ public class ModifyPartController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param event is when the save button is clicked.
+     *This method grabs the text from the input fields,
+     *throws exceptions based on required limits,
+     *Then adds either an inhouse or outsourced part.
+     */
     public void SaveButton(ActionEvent event) {
 
         try {
@@ -140,7 +150,11 @@ public class ModifyPartController implements Initializable {
         }
     }
 
-
+    /**
+     *Returns to home page.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void CancelButton(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
@@ -152,6 +166,10 @@ public class ModifyPartController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Sets the text depending on which radio button is selected.
+     * @param ev
+     */
     public void ListenRadio(ActionEvent ev) {
         if (InhouseRadioButton.isSelected()) {
             RadioTextChange.setText("Machine ID");
@@ -160,6 +178,11 @@ public class ModifyPartController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param x is the specified error message.
+     * Pops up a confirmation type alert with error message and OK button.
+     */
     public void AlertMethod(String x) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, x, ButtonType.OK);
         alert.showAndWait();
@@ -168,6 +191,12 @@ public class ModifyPartController implements Initializable {
             alert.close();
         }
     }
+
+    /**
+     *Exits the program
+     *@param event
+     *@throws IOException
+     */
     public void ExitButton(ActionEvent event) throws IOException {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
