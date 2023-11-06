@@ -72,9 +72,7 @@ public class Model {
      * Returns Product ID
      * @return
     */
-////    public int returnOgPartID(){
-////        return this.
-//    }
+
     public int returnProductID(){
         incrementingProductID--;
         return incrementingProductID;
