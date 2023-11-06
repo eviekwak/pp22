@@ -101,7 +101,7 @@ public class ModifyPartController implements Initializable {
                 alert.showAndWait();
 
                 if (alert.getResult() == ButtonType.YES) {
-                    InHouse newPart = new InHouse(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin, inputMax, Integer.parseInt(inputMachineID));
+                    InHouse newPart = new InHouse(Integer.parseInt(IDField.getText()), inputName, inputPrice, inputInv, inputMin, inputMax, Integer.parseInt(inputMachineID));
                     Model.getInstance().getInventory().updatePart(Model.getInstance().getPartIndexToBeModified(), newPart);
                     alert.close();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
@@ -122,7 +122,7 @@ public class ModifyPartController implements Initializable {
                 alert.showAndWait();
 
                 if (alert.getResult() == ButtonType.YES) {
-                    Outsourced newPart = new Outsourced(Model.getInstance().returnPartID(), inputName, inputPrice, inputInv, inputMin, inputMax, inputMachineID);
+                    Outsourced newPart = new Outsourced(Integer.parseInt(IDField.getText()), inputName, inputPrice, inputInv, inputMin, inputMax, inputMachineID);
                     Model.getInstance().getInventory().updatePart(Model.getInstance().getPartIndexToBeModified(), newPart);
                     alert.close();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
