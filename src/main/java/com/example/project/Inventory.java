@@ -6,8 +6,8 @@ import javafx.collections.ObservableList;
 
 public class Inventory {
 
-    private ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private static ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     /**
      * The constructor for the Inventory Object.
@@ -20,7 +20,7 @@ public class Inventory {
      *adds a new part at index 0
      * @param newPart
      */
-    public void addPart(Part newPart) { //adds a new part at index 0
+    public static void addPart(Part newPart) { //adds a new part at index 0
 
         allParts.add(0, newPart);
     }
@@ -29,7 +29,7 @@ public class Inventory {
      *adds a new product at index 0
      * @param newProduct
      */
-    public void addProduct(Product newProduct) { //adds a new product at index 0
+    public static void addProduct(Product newProduct) { //adds a new product at index 0
         allProducts.add(0, newProduct);
     }
 
@@ -38,7 +38,7 @@ public class Inventory {
      * @param partId
      * @return lookedupPartId up to a single product that matches the int
      */
-    public Part lookupPart(int partId) {
+    public static Part lookupPart(int partId) {
 
         
         Part lookedupPartId = null;
@@ -60,7 +60,7 @@ public class Inventory {
      * @param partName
      * @return newPartsList a list containing all the parts which contain @param partName
      */
-    public ObservableList<Part> lookupPart(String partName) {
+    public static ObservableList<Part> lookupPart(String partName) {
 
         ObservableList<Part> newPartsList = FXCollections.observableArrayList();
 
@@ -79,7 +79,7 @@ public class Inventory {
      * @param productId
      * @return lookedup ProductId up to a single product that matches the int
      */
-    public Product lookupProduct(int productId) {
+    public static Product lookupProduct(int productId) {
 
         Product lookedupProductId = null;
         for (Product searchedProduct : getAllProducts()){
@@ -100,7 +100,7 @@ public class Inventory {
      * @param productName
      * @return newProductsList a list containing all the products which contain @param productName
      */
-    public ObservableList<Product> lookupProduct(String productName) {
+    public static ObservableList<Product> lookupProduct(String productName) {
 
         ObservableList<Product> newProductsList = FXCollections.observableArrayList();
 
@@ -120,9 +120,9 @@ public class Inventory {
      * @param index
      * @param selectedPart
      */
-        public void updatePart ( int index, Part selectedPart){ //updates the part with modifications
+        public static void updatePart ( int index, Part selectedPart){ //updates the part with modifications
 
-            this.allParts.set(index, selectedPart);
+            allParts.set(index, selectedPart);
         }
 
     /**
@@ -130,9 +130,9 @@ public class Inventory {
      * @param index
      * @param newProduct
      */
-    public void updateProduct ( int index, Product newProduct){ //updates the product with modifications
+    public static void updateProduct ( int index, Product newProduct){ //updates the product with modifications
 
-            this.allProducts.set(index, newProduct);
+            allProducts.set(index, newProduct);
         }
 
     /**
@@ -140,8 +140,8 @@ public class Inventory {
      * @param selectedPart
      * @return
      */
-    public boolean deletePart (Part selectedPart){ //deletes the specified part
-            this.allParts.remove(selectedPart);
+    public static boolean deletePart (Part selectedPart){ //deletes the specified part
+            allParts.remove(selectedPart);
             return true;
         }
 
@@ -150,9 +150,9 @@ public class Inventory {
      * @param selectedProduct
      * @return
      */
-        public boolean deleteProduct (Product selectedProduct){ //deletes the specified product
+        public static boolean deleteProduct (Product selectedProduct){ //deletes the specified product
 
-            this.allProducts.remove(selectedProduct);
+            allProducts.remove(selectedProduct);
             return true;
         }
 
@@ -160,18 +160,18 @@ public class Inventory {
      *
      * @return getAllProducts list
      */
-        public ObservableList<Product> getAllProducts () { //returns the ObservableList allProducts
+        public static ObservableList<Product> getAllProducts () { //returns the ObservableList allProducts
 
-            return this.allProducts;
+            return allProducts;
         }
 
     /**
      *
      * @return getAllParts list
      */
-        public ObservableList<Part> getAllParts () {//returns the ObservableList allParts
+        public static ObservableList<Part> getAllParts () {//returns the ObservableList allParts
 
-            return this.allParts;
+            return allParts;
         }
 
 }
